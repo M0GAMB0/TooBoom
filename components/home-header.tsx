@@ -1,7 +1,7 @@
-import { Colors } from "@/constants/theme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { getCurrentFormattedDate } from "@/src/utils/date";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Image, Text, useColorScheme, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { Text, View } from "react-native";
 
 interface HomeHeaderProps {
   userName?: string;
@@ -9,24 +9,22 @@ interface HomeHeaderProps {
 }
 
 export default function HomeHeader({
-  userName = "Sharan",
+  userName = "Saikumar",
   streakDays = 12,
 }: HomeHeaderProps) {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const colors = isDark ? Colors.dark : Colors.light;
+  const { colors } = useAppColors();
 
   const formattedDate = getCurrentFormattedDate();
 
   return (
     <View
-      className="flex-row items-center justify-between px-[24px] py-[16px]"
-      style={{ borderBottomWidth: 1, borderColor: colors.borderColor }}
+      className="flex-row items-center justify-between container customContainer"
+      // style={{ borderBottomWidth: 1, borderColor: colors.borderColor }}
     >
       {/* Left side: Avatar with date and greeting */}
-      <View className="flex-row items-center flex-1 min-w-0">
+      <View className="flex-row items-center flex-1 min-w-0 max-w-[60%]">
         {/* Avatar */}
-        <View
+        {/* <View
           className="w-12 h-12 rounded-full overflow-hidden mr-3 border border-primary flex-shrink-0"
           style={{
             backgroundColor: colors.primary,
@@ -37,50 +35,36 @@ export default function HomeHeader({
             className="w-full h-full"
             alt="Avatar"
           />
-        </View>
+        </View> */}
 
         {/* Date and Greeting */}
         <View className="flex-1">
-          <Text className="text-sm" style={{ color: colors.tabInactive }}>
+          <Text
+            className="text-sm font-medium uppercase tracking-wider"
+            style={{ color: colors.secondaryText }}
+          >
             {formattedDate}
           </Text>
-          <View className="flex-row flex-wrap">
-            <Text
-              className="text-lg font-semibold"
-              style={{ color: colors.text }}
-            >
-              Hello,{" "}
-            </Text>
-            <Text
-              className="text-lg font-semibold break-keep"
-              style={{ color: colors.text }}
-            >
-              {userName} 👋
-            </Text>
-          </View>
+          <Text
+            className="text-2xl font-bold mt-1"
+            numberOfLines={2}
+            style={{ color: colors.text }}
+          >
+            Hello, {userName} 👋
+          </Text>
         </View>
       </View>
 
-      {/* Right side: Streak */}
+      {/* Right side: settings */}
       <View
-        className="flex-row items-center rounded-full py-[8px] px-[16px] gap-[5px]"
+        className="flex-row items-center rounded-full py-[8px] px-[8px]"
         style={{
           backgroundColor: colors.streakBadge,
           borderWidth: 1,
           borderColor: colors.borderColor,
         }}
       >
-        <MaterialIcons
-          name="local-fire-department"
-          size={24}
-          color={colors.streak}
-        />
-        <Text
-          className="text-base font-bold ml-1"
-          style={{ color: colors.text }}
-        >
-          {streakDays} Days
-        </Text>
+        <Ionicons name="settings-sharp" size={24} color={colors.icon} />
       </View>
     </View>
   );

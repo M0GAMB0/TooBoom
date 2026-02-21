@@ -1,11 +1,8 @@
-import { Colors } from "@/constants/theme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { Stack } from "expo-router";
-import { useColorScheme } from "react-native";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const colors = isDark ? Colors.dark : Colors.light;
+  const { colors } = useAppColors();
 
   return (
     <Stack

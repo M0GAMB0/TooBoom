@@ -9,8 +9,8 @@ const tintColorLight = "#0a7ea4";
 const tintColorDark = "#fff";
 const primaryColor = "#5B13EC";
 const defaultColor = "#A492C9";
-const tabBackgroundColorLight = "#fff";
-const tabBackgroundColorDark = "#1F182F";
+const cardBackgroundColorLight = "#fff";
+const cardBackgroundColorDark = "#1F182F";
 const whiteColor = "#fff";
 const inactiveLight = "#94A3B8";
 const inactiveDark = "#64748B";
@@ -19,39 +19,42 @@ const borderDark = "#2F2348";
 const streakColor = "#F97316";
 const streakBadgeLight = "#FAF5FF";
 const streakBadgeDark = "#1F182F";
+const secondaryText = "#94A3B8";
 
 export const Colors = {
   light: {
     text: "#11181C",
-    background: "#F8F7FF",
+    background: "#F9F5FF",
     tint: tintColorLight,
-    icon: "#687076",
+    icon: "#64748B",
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
     primary: primaryColor,
     default: defaultColor,
-    tabBackground: tabBackgroundColorLight,
+    cardBackground: cardBackgroundColorLight,
     white: whiteColor,
     tabInactive: inactiveLight,
     borderColor: borderLight,
     streak: streakColor,
     streakBadge: streakBadgeLight,
+    secondaryText,
   },
   dark: {
     text: "#ECEDEE",
     background: "#161022",
     tint: tintColorDark,
-    icon: "#9BA1A6",
+    icon: "#fff",
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
     primary: primaryColor,
     default: defaultColor,
-    tabBackground: tabBackgroundColorDark,
+    cardBackground: cardBackgroundColorDark,
     white: whiteColor,
     tabInactive: inactiveDark,
     borderColor: borderDark,
     streak: streakColor,
     streakBadge: streakBadgeDark,
+    secondaryText,
   },
 };
 
