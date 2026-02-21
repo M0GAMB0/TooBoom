@@ -20,6 +20,8 @@ export default function TabLayout() {
           backgroundColor: colors.tabBackground,
           borderTopColor: colors.tabBorder,
           borderTopWidth: 1,
+          paddingTop: 10,
+          height: 110,
         },
       }}
     >
@@ -30,6 +32,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <IconSymbol size={size} name="house.fill" color={color} />
           ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -39,6 +42,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="tasks" size={size} color={color} />
           ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -48,6 +52,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="calendar-clear-outline" size={size} color={color} />
           ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -57,6 +62,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Entypo name="stopwatch" size={size} color={color} />
           ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -66,6 +72,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="analytics" size={size} color={color} />
           ),
+          headerShown: false,
         }}
       />
     </Tabs>
