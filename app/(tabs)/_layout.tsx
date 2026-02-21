@@ -1,33 +1,71 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Colors } from "@/constants/theme";
+import Entypo from "@expo/vector-icons/Entypo";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Tabs } from "expo-router";
+import { useColorScheme } from "react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const isDark = colorScheme === "dark";
+  const colors = isDark ? Colors.dark : Colors.light;
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: isDark ? colors.white : colors.primary,
+        tabBarInactiveTintColor: colors.tabInactive,
+        tabBarStyle: {
+          backgroundColor: colors.tabBackground,
+          borderTopColor: colors.tabBorder,
+          borderTopWidth: 1,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <IconSymbol size={size} name="house.fill" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="tasks"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Tasks",
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="tasks" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="planner"
+        options={{
+          title: "Planner",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="calendar-clear-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="focus"
+        options={{
+          title: "Focus",
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="stopwatch" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="insights"
+        options={{
+          title: "Insights",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="analytics" size={size} color={color} />
+          ),
         }}
       />
     </Tabs>
