@@ -16,6 +16,9 @@ const inactiveLight = "#94A3B8";
 const inactiveDark = "#64748B";
 const borderLight = "#5B13EC0D";
 const borderDark = "#2F2348";
+const streakColor = "#F97316";
+const streakBadgeLight = "#FAF5FF";
+const streakBadgeDark = "#1F182F";
 
 export const Colors = {
   light: {
@@ -30,7 +33,9 @@ export const Colors = {
     tabBackground: tabBackgroundColorLight,
     white: whiteColor,
     tabInactive: inactiveLight,
-    tabBorder: borderLight,
+    borderColor: borderLight,
+    streak: streakColor,
+    streakBadge: streakBadgeLight,
   },
   dark: {
     text: "#ECEDEE",
@@ -44,7 +49,9 @@ export const Colors = {
     tabBackground: tabBackgroundColorDark,
     white: whiteColor,
     tabInactive: inactiveDark,
-    tabBorder: borderDark,
+    borderColor: borderDark,
+    streak: streakColor,
+    streakBadge: streakBadgeDark,
   },
 };
 
