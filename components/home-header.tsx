@@ -50,7 +50,7 @@ export default function HomeHeader({
             numberOfLines={2}
             style={{ color: colors.text }}
           >
-            Hello, {userName} 👋
+            Hello, <Text className="whitespace-nowrap">{userName}👋</Text>
           </Text>
         </View>
       </View>

@@ -20,6 +20,8 @@ const streakColor = "#F97316";
 const streakBadgeLight = "#FAF5FF";
 const streakBadgeDark = "#1F182F";
 const secondaryText = "#94A3B8";
+const customRed = "#F87171";
+const errorRed = "#EF4444";
 
 export const Colors = {
   light: {
@@ -38,6 +40,8 @@ export const Colors = {
     streak: streakColor,
     streakBadge: streakBadgeLight,
     secondaryText,
+    customRed,
+    errorRed,
   },
   dark: {
     text: "#ECEDEE",
@@ -55,6 +59,8 @@ export const Colors = {
     streak: streakColor,
     streakBadge: streakBadgeDark,
     secondaryText,
+    customRed,
+    errorRed,
   },
 };
 
