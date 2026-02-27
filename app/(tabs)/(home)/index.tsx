@@ -17,6 +17,7 @@ export default function HomeScreen() {
           <ScrollView
             showsVerticalScrollIndicator={false}
             className="customContainer"
+            contentContainerStyle={{ paddingBottom: 40 }}
           >
             <StatsSection streakDays={12} completedTasks={7} totalTasks={8} />
 
