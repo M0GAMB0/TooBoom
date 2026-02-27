@@ -117,13 +117,13 @@ export default function TaskDashboardSection() {
   /* ---------------- UI ---------------- */
 
   return (
-    <View className="flex-1 px-4 pt-6">
+    <View className="flex-1 pt-6">
       {/* -------- SEGMENTED TABS -------- */}
 
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        className="mb-6"
+        className="mb-6 pb-3"
       >
         {TABS.map((tab) => {
           const isActive = activeTab === tab.key;
@@ -132,7 +132,7 @@ export default function TaskDashboardSection() {
             <TouchableOpacity
               key={tab.key}
               onPress={() => setActiveTab(tab.key)}
-              className="px-6 py-3 rounded-full mr-3"
+              className="px-6 py-3 rounded-full mr-3 shadow-md"
               style={{
                 backgroundColor: isActive
                   ? colors.primary
@@ -160,7 +160,7 @@ export default function TaskDashboardSection() {
         {filteredTasks.map((task) => (
           <View
             key={task.id}
-            className="flex-row items-center justify-between p-5 rounded-2xl mb-5"
+            className="flex-row items-center justify-between p-5 rounded-2xl mb-5 shadow-lg"
             style={{ backgroundColor: colors.cardBackground }}
           >
             <View className="flex-row items-center">
