@@ -7,26 +7,24 @@ interface NeumorphicCardProps {
   style?: any;
 }
 export const NeumorphicCard = ({ children, colors, style }: NeumorphicCardProps) => {
+  const isDark = colors.background === "#161022"; // Simple check or pass isDark prop
+
+  const darkShadowColor = isDark ? "#000" : "#c3c3c3";
+  const lightShadowColor = isDark ? "#2A1E40" : "#fdfdfd";
+
   return (
     <View
       style={[
-        {
-          shadowColor: "#000",
-          shadowOffset: { width: 6, height: 6 },
-          shadowOpacity: 0.25,
-          shadowRadius: 8,
-          backgroundColor: colors.background,
-        },
         style,
       ]}
-      className="rounded-2xl"
+      className="rounded-2xl shadow-2xl"
     >
       <View
         style={{
-          shadowColor: "#FFF",
-          shadowOffset: { width: -6, height: -6 },
-          shadowOpacity: 0.8,
-          shadowRadius: 8,
+          shadowColor: lightShadowColor,
+          shadowOffset: { width: -24, height: -24 },
+          shadowOpacity: 1,
+          shadowRadius: 50,
           backgroundColor: colors.background,
         }}
         className="rounded-2xl"

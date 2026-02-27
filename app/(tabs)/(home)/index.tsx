@@ -4,6 +4,7 @@ import TaskCardWrapper from "@/components/home/TaskCardWrapper";
 import TaskDashboardSection from "@/components/home/TaskDashboardSection";
 import { FAB } from "@/components/ui/FAB";
 import { useAppColors } from "@/hooks/use-app-colors";
+import { navigateToNewTask } from "@/src/utils/navigation";
 import { ScrollView, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -35,7 +36,7 @@ export default function HomeScreen() {
             <TaskDashboardSection />
           </ScrollView>
         </View>
-        <FAB onPress={() => console.log("FAB pressed")} />
+        <FAB onPress={navigateToNewTask} />
       </SafeAreaView>
     </SafeAreaProvider>
   );
