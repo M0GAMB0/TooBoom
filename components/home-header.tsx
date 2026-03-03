@@ -4,12 +4,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 
 interface HomeHeaderProps {
-  userName?: string;
+  title?: string;
   streakDays?: number;
 }
 
 export default function HomeHeader({
-  userName = "Saikumar",
+  title = " Hello, Saikumar 👋",
   streakDays = 12,
 }: HomeHeaderProps) {
   const { colors } = useAppColors();
@@ -50,7 +50,7 @@ export default function HomeHeader({
             numberOfLines={2}
             style={{ color: colors.text }}
           >
-            Hello, <Text className="whitespace-nowrap">{userName}👋</Text>
+            <Text className="whitespace-nowrap">{title}</Text>
           </Text>
         </View>
       </View>

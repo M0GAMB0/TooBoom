@@ -6,13 +6,16 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 /* ---------------- TAB TYPES ---------------- */
 
-type TabType =
-  | "upcoming"
-  | "today"
-  | "pinned"
-  | "favorites"
-  | "overdue"
-  | "completed";
+export enum TaskTab {
+  UPCOMING = "upcoming",
+  TODAY = "today",
+  PINNED = "pinned",
+  FAVORITES = "favorites",
+  OVERDUE = "overdue",
+  COMPLETED = "completed",
+}
+
+type TabType = TaskTab;
 
 /* ---------------- TASK MODEL ---------------- */
 
@@ -21,28 +24,26 @@ type TaskType = {
   title: string;
   time: string;
   date: string;
-  completed?: boolean;
-  pinned?: boolean;
-  favorite?: boolean;
+  tab: TaskTab;
   indicatorColor: string;
 };
 
 /* ---------------- TAB CONFIG ---------------- */
 
 const TABS: { key: TabType; label: string }[] = [
-  { key: "upcoming", label: "Upcoming" },
-  { key: "today", label: "Today" },
-  { key: "pinned", label: "Pinned" },
-  { key: "favorites", label: "Favorites" },
-  { key: "overdue", label: "Overdue" },
-  { key: "completed", label: "Completed" },
+  { key: TaskTab.UPCOMING, label: "Upcoming" },
+  { key: TaskTab.TODAY, label: "Today" },
+  { key: TaskTab.PINNED, label: "Pinned" },
+  { key: TaskTab.FAVORITES, label: "Favorites" },
+  { key: TaskTab.OVERDUE, label: "Overdue" },
+  { key: TaskTab.COMPLETED, label: "Completed" },
 ];
 
 export default function TaskDashboardSection() {
   const scheme = useColorScheme() ?? "light";
   const colors = Colors[scheme];
 
-  const [activeTab, setActiveTab] = useState<TabType>("upcoming");
+  const [activeTab, setActiveTab] = useState<TabType>(TaskTab.UPCOMING);
 
   /* ---------------- STATIC DATA ---------------- */
 
@@ -52,6 +53,7 @@ export default function TaskDashboardSection() {
       title: "Grocery Shopping",
       time: "5:00 PM",
       date: "2026-03-01",
+      tab: TaskTab.UPCOMING,
       indicatorColor: "#F59E0B",
     },
     {
@@ -59,7 +61,7 @@ export default function TaskDashboardSection() {
       title: "Dentist Appointment",
       time: "11:30 AM",
       date: "2026-02-27",
-      pinned: true,
+      tab: TaskTab.PINNED,
       indicatorColor: "#60A5FA",
     },
     {
@@ -67,7 +69,7 @@ export default function TaskDashboardSection() {
       title: "Submit Assignment",
       time: "8:00 PM",
       date: "2026-02-27",
-      favorite: true,
+      tab: TaskTab.FAVORITES,
       indicatorColor: "#10B981",
     },
     {
@@ -75,6 +77,7 @@ export default function TaskDashboardSection() {
       title: "Pay Electricity Bill",
       time: "6:00 PM",
       date: "2026-02-20",
+      tab: TaskTab.OVERDUE,
       indicatorColor: "#EF4444",
     },
     {
@@ -82,8 +85,16 @@ export default function TaskDashboardSection() {
       title: "Daily Workout",
       time: "7:00 AM",
       date: "2026-02-26",
-      completed: true,
+      tab: TaskTab.COMPLETED,
       indicatorColor: "#8B5CF6",
+    },
+    {
+      id: 6,
+      title: "Morning Yoga",
+      time: "6:00 AM",
+      date: "2026-03-03",
+      tab: TaskTab.TODAY,
+      indicatorColor: "#F472B6",
     },
   ];
 
@@ -92,26 +103,7 @@ export default function TaskDashboardSection() {
   /* ---------------- FILTER ENGINE ---------------- */
 
   const filteredTasks = useMemo(() => {
-    switch (activeTab) {
-      case "today":
-        return tasks.filter((t) => t.date === today);
-
-      case "pinned":
-        return tasks.filter((t) => t.pinned);
-
-      case "favorites":
-        return tasks.filter((t) => t.favorite);
-
-      case "completed":
-        return tasks.filter((t) => t.completed);
-
-      case "overdue":
-        return tasks.filter((t) => !t.completed && t.date < today);
-
-      case "upcoming":
-      default:
-        return tasks.filter((t) => !t.completed && t.date > today);
-    }
+    return tasks.filter((t) => t.tab === activeTab);
   }, [activeTab]);
 
   /* ---------------- UI ---------------- */

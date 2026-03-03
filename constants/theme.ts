@@ -23,6 +23,28 @@ const secondaryText = "#94A3B8";
 const customRed = "#F87171";
 const errorRed = "#EF4444";
 
+// Priority and Tag colors
+const priorityHigh = "#EF4444";
+const priorityHighBg = "#7F1D1D";
+const priorityMed = "#F59E0B";
+const priorityMedBg = "#78350F";
+const priorityLow = "#10B981";
+const priorityLowBg = "#064E3B";
+
+const energyHigh = "#8B5CF6";
+const energyHighBg = "#4C1D95";
+const energyLow = "#FBBF24";
+const energyLowBg = "#78350F";
+
+const difficultyHard = "#6366F1";
+const difficultyHardBg = "#312E81";
+const difficultyMed = "#8B5CF6";
+const difficultyMedBg = "#4C1D95";
+
+const workCategory = "#3B82F6";
+const personalCategory = "#EC4899";
+const healthCategory = "#10B981";
+
 export const Colors = {
   light: {
     text: "#11181C",
@@ -42,6 +64,23 @@ export const Colors = {
     secondaryText,
     customRed,
     errorRed,
+    priorityHigh: priorityHigh,
+    priorityHighBg: priorityHighBg + '33',
+    priorityMed: priorityMed,
+    priorityMedBg: priorityMedBg + '33',
+    priorityLow: priorityLow,
+    priorityLowBg: priorityLowBg + '33',
+    energyHigh: energyHigh,
+    energyHighBg: energyHighBg + '33',
+    energyLow: energyLow,
+    energyLowBg: energyLowBg + '33',
+    difficultyHard: difficultyHard,
+    difficultyHardBg: difficultyHardBg + '33',
+    difficultyMed: difficultyMed,
+    difficultyMedBg: difficultyMedBg + '33',
+    categoryWork: workCategory,
+    categoryPersonal: personalCategory,
+    categoryHealth: healthCategory,
   },
   dark: {
     text: "#ECEDEE",
@@ -61,6 +100,23 @@ export const Colors = {
     secondaryText,
     customRed,
     errorRed,
+    priorityHigh: "#F87171",
+    priorityHighBg: "#450A0A33",
+    priorityMed: "#FBBF24",
+    priorityMedBg: "#451A0333",
+    priorityLow: "#34D399",
+    priorityLowBg: "#064E3B33",
+    energyHigh: "#A78BFA",
+    energyHighBg: "#2E106533",
+    energyLow: "#FCD34D",
+    energyLowBg: "#451A0333",
+    difficultyHard: "#818CF8",
+    difficultyHardBg: "#1E1B4B33",
+    difficultyMed: "#A78BFA",
+    difficultyMedBg: "#2E106533",
+    categoryWork: workCategory,
+    categoryPersonal: personalCategory,
+    categoryHealth: healthCategory,
   },
 };
 
