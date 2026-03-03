@@ -1,23 +1,60 @@
-import { NeumorphicCard } from "@/components/NeumorphicCard";
-import SelectionGroup from "@/components/add-task/SelectionGroup";
-import SubtaskList from "@/components/add-task/SubtaskList";
-import TaskFormHeader from "@/components/add-task/TaskFormHeader";
-import TaskInputSection from "@/components/add-task/TaskInputSection";
-import ToggleItem from "@/components/add-task/ToggleItem";
+import {
+  DifficultyEnergySection,
+  QuickActionsRow,
+  SelectionGroup,
+  SubtaskList,
+  TaskFormHeader,
+  TaskInputSection,
+  ToggleItem,
+} from "@/components/add-task";
 import { useAppColors } from "@/hooks/use-app-colors";
-import { Ionicons } from "@expo/vector-icons";
+import { addCategory } from "@/src/redux/categorySlice";
+import { RootState } from "@/src/redux/store";
 import React, { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Keyboard,
+  Modal,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+
+const COLORS = ["#6366f1", "#a855f7", "#3b82f6", "#10b981", "#f87171", "#fbbf24"];
 
 export default function NewTaskScreen() {
-  const { colors, isDark } = useAppColors();
+  const { colors } = useAppColors();
+  const dispatch = useDispatch();
+  const categories = useSelector((state: RootState) => state.categories.categories);
 
   // Form State
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("High");
   const [category, setCategory] = useState("Work");
+
+  const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [selectedColor, setSelectedColor] = useState(COLORS[0]);
+
+  const handleAddCategory = () => {
+    if (newCategoryName.trim()) {
+      dispatch(
+        addCategory({
+          label: newCategoryName,
+          value: newCategoryName,
+          color: selectedColor,
+        })
+      );
+      setCategory(newCategoryName);
+      setNewCategoryName("");
+      setIsAddingCategory(false);
+    }
+  };
   const [subtasks, setSubtasks] = useState([
     { id: "1", text: "Draft initial outline", completed: false },
     { id: "2", text: "", completed: false },
@@ -38,11 +75,18 @@ export default function NewTaskScreen() {
   };
 
   const toggleSubtask = (id: string) => {
-    setSubtasks(subtasks.map((s) => (s.id === id ? { ...s, completed: !s.completed } : s)));
+    setSubtasks(
+      subtasks.map((s) =>
+        s.id === id ? { ...s, completed: !s.completed } : s
+      )
+    );
   };
 
   return (
-    <SafeAreaView className="flex-1" style={{ backgroundColor: colors.background }}>
+    <SafeAreaView
+      className="flex-1"
+      style={{ backgroundColor: colors.background }}
+    >
       <TaskFormHeader />
 
       <ScrollView
@@ -57,48 +101,7 @@ export default function NewTaskScreen() {
           setDescription={setDescription}
         />
 
-        {/* Quick Actions Row */}
-        <View className="flex-row px-5 mt-6 justify-between">
-          <NeumorphicCard colors={colors} style={{ flex: 1, marginRight: 10 }}>
-            <TouchableOpacity
-              className="flex-row items-center px-4 py-3 rounded-2xl"
-              style={{ backgroundColor: colors.cardBackground }}
-            >
-              <Ionicons
-                name="calendar-outline"
-                size={20}
-                color={colors.primary}
-              />
-              <Text className="ml-2 font-bold" style={{ color: colors.text }}>
-                Today
-              </Text>
-            </TouchableOpacity>
-          </NeumorphicCard>
-
-          <NeumorphicCard colors={colors} style={{ flex: 1, marginRight: 10 }}>
-            <TouchableOpacity
-              className="flex-row items-center px-4 py-3 rounded-2xl"
-              style={{ backgroundColor: colors.cardBackground }}
-            >
-              <Ionicons name="time-outline" size={20} color={colors.primary} />
-              <Text className="ml-2 font-bold" style={{ color: colors.text }}>
-                10:00 AM
-              </Text>
-            </TouchableOpacity>
-          </NeumorphicCard>
-
-          <NeumorphicCard colors={colors} style={{ flex: 1 }}>
-            <TouchableOpacity
-              className="flex-row items-center px-4 py-3 rounded-2xl"
-              style={{ backgroundColor: colors.cardBackground }}
-            >
-              <Ionicons name="flag-outline" size={20} color={colors.primary} />
-              <Text className="ml-2 font-bold" style={{ color: colors.text }}>
-                Priority
-              </Text>
-            </TouchableOpacity>
-          </NeumorphicCard>
-        </View>
+        <QuickActionsRow colors={colors} />
 
         <SelectionGroup
           label="Priority"
@@ -115,33 +118,11 @@ export default function NewTaskScreen() {
           label="Category"
           selectedValue={category}
           onSelect={setCategory}
-          options={[
-            { label: "Work", value: "Work" },
-            { label: "Personal", value: "Personal" },
-            { label: "Shopping", value: "Shopping" },
-            { label: "+", value: "add" },
-          ]}
+          options={categories}
+          onAddPress={() => setIsAddingCategory(true)}
         />
 
-        {/* Difficulty & Energy Level (Simplified for now as placeholders) */}
-        <View className="flex-row px-5 mt-8 justify-between">
-          <View className="flex-1 mr-4">
-            <Text className="text-base font-semibold mb-3" style={{ color: colors.secondaryText }}>Difficulty</Text>
-            <View className="h-10 rounded-2xl justify-center px-4" style={{ backgroundColor: colors.cardBackground }}>
-               <View className="h-2 rounded-full w-full" style={{ backgroundColor: colors.borderColor }}>
-                  <View className="h-full rounded-full w-3/4" style={{ backgroundColor: colors.primary }} />
-               </View>
-            </View>
-          </View>
-          <View className="flex-1">
-            <Text className="text-base font-semibold mb-3" style={{ color: colors.secondaryText }}>Energy Level</Text>
-            <View className="flex-row justify-between items-center h-10 px-4 rounded-2xl" style={{ backgroundColor: colors.cardBackground }}>
-                <Ionicons name="battery-dead-outline" size={20} color={colors.secondaryText} />
-                <Ionicons name="battery-half" size={20} color={colors.primary} />
-                <Ionicons name="battery-full-outline" size={20} color={colors.secondaryText} />
-            </View>
-          </View>
-        </View>
+        <DifficultyEnergySection colors={colors} />
 
         <SubtaskList
           subtasks={subtasks}
@@ -170,6 +151,130 @@ export default function NewTaskScreen() {
 
         <View className="h-12" />
       </ScrollView>
+
+      {/* Add Category Bottom Sheet */}
+      <Modal
+        visible={isAddingCategory}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setIsAddingCategory(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setIsAddingCategory(false)}>
+          <View
+            className="flex-1 justify-end"
+            style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
+          >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View
+                className="w-full rounded-t-[40px] p-8 pb-10"
+                style={{ backgroundColor: colors.cardBackground }}
+              >
+                {/* Handle Bar */}
+                <View className="items-center mb-6">
+                  <View
+                    className="w-12 h-1.5 rounded-full"
+                    style={{ backgroundColor: colors.borderColor }}
+                  />
+                </View>
+
+                <Text
+                  className="text-2xl font-bold text-center mb-1"
+                  style={{ color: colors.text }}
+                >
+                  Add New Category
+                </Text>
+                <Text
+                  className="text-sm text-center mb-8"
+                  style={{ color: colors.secondaryText }}
+                >
+                  Organize your tasks efficiently
+                </Text>
+
+                <View className="mb-6">
+                  <Text
+                    className="text-sm font-semibold mb-3"
+                    style={{ color: colors.text }}
+                  >
+                    Category Name
+                  </Text>
+                  <TextInput
+                    autoFocus
+                    className="h-14 rounded-2xl px-5 text-base"
+                    style={{
+                      backgroundColor: colors.background,
+                      color: colors.text,
+                      borderWidth: 1,
+                      borderColor: colors.borderColor,
+                    }}
+                    placeholder="e.g. Personal Projects"
+                    placeholderTextColor={colors.secondaryText}
+                    value={newCategoryName}
+                    onChangeText={setNewCategoryName}
+                  />
+                </View>
+
+                <View className="mb-10">
+                  <Text
+                    className="text-sm font-semibold mb-4"
+                    style={{ color: colors.text }}
+                  >
+                    Select Color
+                  </Text>
+                  <View className="flex-row justify-between">
+                    {COLORS.map((color) => (
+                      <TouchableOpacity
+                        key={color}
+                        onPress={() => setSelectedColor(color)}
+                        className="w-12 h-12 rounded-full items-center justify-center"
+                        style={{
+                          backgroundColor: color,
+                          borderWidth: selectedColor === color ? 3 : 0,
+                          borderColor: colors.primary,
+                        }}
+                      >
+                        {selectedColor === color && (
+                          <View
+                            className="w-14 h-14 rounded-full border-2 absolute"
+                            style={{ borderColor: colors.primary }}
+                          />
+                        )}
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </View>
+
+                <TouchableOpacity
+                  onPress={handleAddCategory}
+                  className="h-16 rounded-2xl items-center justify-center mb-4"
+                  style={{
+                    backgroundColor: colors.primary,
+                    shadowColor: colors.primary,
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 8,
+                    elevation: 5,
+                  }}
+                >
+                  <Text className="text-white text-lg font-bold">Create Category</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => setIsAddingCategory(false)}
+                  className="h-16 rounded-2xl items-center justify-center"
+                  style={{ backgroundColor: colors.background }}
+                >
+                  <Text
+                    className="text-lg font-semibold"
+                    style={{ color: "#475569" }}
+                  >
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
     </SafeAreaView>
   );
 }

@@ -1,5 +1,6 @@
 import { NeumorphicCard } from "@/components/NeumorphicCard";
 import { useAppColors } from "@/hooks/use-app-colors";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -14,6 +15,7 @@ interface Props {
   options: Option[];
   selectedValue: string;
   onSelect: (value: string) => void;
+  onAddPress?: () => void;
 }
 
 export default function SelectionGroup({
@@ -21,6 +23,7 @@ export default function SelectionGroup({
   options,
   selectedValue,
   onSelect,
+  onAddPress,
 }: Props) {
   const { colors, isDark } = useAppColors();
 
@@ -37,34 +40,34 @@ export default function SelectionGroup({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 5, paddingVertical: 10 }}
       >
-        <View className="flex-row">
+        <View className="flex-row items-center">
           {options.map((option) => {
             const isSelected = selectedValue === option.value;
-            if (isSelected) {
-              return (
-                <TouchableOpacity
-                  key={option.value}
-                  onPress={() => onSelect(option.value)}
-                  className="px-6 py-3 rounded-2xl mr-4 flex-row items-center"
-                  style={{
-                    backgroundColor: colors.primary,
-                    borderWidth: 1,
-                    borderColor: colors.primary,
-                  }}
-                >
-                  {option.icon && (
-                    <Text className="mr-2" style={{ color: "white" }}>
-                      {option.icon}
-                    </Text>
-                  )}
-                  <Text
-                    className="font-bold text-base text-white"
-                  >
-                    {option.label}
-                  </Text>
-                </TouchableOpacity>
-              );
-            }
+            // if (isSelected) {
+            //   return (
+            //     <TouchableOpacity
+            //       key={option.value}
+            //       onPress={() => onSelect(option.value)}
+            //       className="px-6 py-3 rounded-2xl mr-4 flex-row items-center"
+            //       style={{
+            //         backgroundColor: colors.primary,
+            //         borderWidth: 1,
+            //         borderColor: colors.primary,
+            //       }}
+            //     >
+            //       {option.icon && (
+            //         <Text className="mr-2" style={{ color: "white" }}>
+            //           {option.icon}
+            //         </Text>
+            //       )}
+            //       <Text
+            //         className="font-bold text-base text-white"
+            //       >
+            //         {option.label}
+            //       </Text>
+            //     </TouchableOpacity>
+            //   );
+            // }
 
             return (
               <NeumorphicCard
@@ -74,17 +77,17 @@ export default function SelectionGroup({
               >
                 <TouchableOpacity
                   onPress={() => onSelect(option.value)}
-                  className="px-6 py-3 rounded-2xl flex-row items-center"
+                  className="px-6 h-15 py-3 rounded-2xl flex-row items-center"
                   style={{
-                    backgroundColor: colors.cardBackground,
+                    backgroundColor: isSelected? colors.primary : colors.cardBackground,
                     borderWidth: 1,
-                    borderColor: colors.borderColor,
+                    borderColor: isSelected? colors.primary : colors.borderColor,
                   }}
                 >
                   {option.icon && (
                     <Text
                       className="mr-2"
-                      style={{ color: colors.primary }}
+                      style={{ color: colors.text }}
                     >
                       {option.icon}
                     </Text>
@@ -99,6 +102,20 @@ export default function SelectionGroup({
               </NeumorphicCard>
             );
           })}
+          {onAddPress && (
+            <NeumorphicCard colors={colors}>
+              <TouchableOpacity
+                onPress={onAddPress}
+                className="px-6 h-15 py-4 rounded-2xl border-2 border-dashed flex-row items-center"
+                style={{
+                  backgroundColor: colors.cardBackground,
+                  borderColor: colors.borderColor,
+                }}
+              >
+                <Ionicons name="add" size={24} color={colors.primary} />
+              </TouchableOpacity>
+            </NeumorphicCard>
+          )}
         </View>
       </ScrollView>
     </View>
