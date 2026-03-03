@@ -62,7 +62,7 @@ export const TaskCard = ({
               className="w-7 h-7 rounded-full border-2 items-center justify-center"
               style={isCompleted ? { backgroundColor: colors.primary, borderColor: colors.primary } : { borderColor: colors.secondaryText }}
             >
-              {isCompleted && <Ionicons name="checkmark" size={18} color="white" />}
+              {isCompleted && <Ionicons name="checkmark" size={18} color={colors.white} />}
             </View>
           </TouchableOpacity>
           <Text 
@@ -75,7 +75,7 @@ export const TaskCard = ({
         
         <TouchableOpacity onPress={onToggleStar}>
           {isStarred ? (
-            <Ionicons name="star" size={24} color="#FBBF24" />
+            <Ionicons name="star" size={24} color={colors.energyLow} />
           ) : (
              <Ionicons name="star-outline" size={24} color={colors.secondaryText} />
           )}

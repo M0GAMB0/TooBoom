@@ -11,12 +11,12 @@ export default function SwipeableTaskItem({ task }: any) {
 
   const renderRight = () => (
     <View className="flex-row">
-      <View className="bg-yellow-400 justify-center px-5">
-        <Star color="#fff" />
+      <View className="justify-center px-5" style={{ backgroundColor: colors.energyLow }}>
+        <Star color={colors.white} />
       </View>
 
-      <View className="bg-blue-500 justify-center px-5">
-        <Pin color="#fff" />
+      <View className="justify-center px-5" style={{ backgroundColor: colors.categoryWork }}>
+        <Pin color={colors.white} />
       </View>
     </View>
   );

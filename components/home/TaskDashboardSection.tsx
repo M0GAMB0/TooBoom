@@ -54,7 +54,7 @@ export default function TaskDashboardSection() {
       time: "5:00 PM",
       date: "2026-03-01",
       tab: TaskTab.UPCOMING,
-      indicatorColor: "#F59E0B",
+      indicatorColor: colors.energyLow,
     },
     {
       id: 2,
@@ -62,7 +62,7 @@ export default function TaskDashboardSection() {
       time: "11:30 AM",
       date: "2026-02-27",
       tab: TaskTab.PINNED,
-      indicatorColor: "#60A5FA",
+      indicatorColor: colors.categoryWork,
     },
     {
       id: 3,
@@ -70,7 +70,7 @@ export default function TaskDashboardSection() {
       time: "8:00 PM",
       date: "2026-02-27",
       tab: TaskTab.FAVORITES,
-      indicatorColor: "#10B981",
+      indicatorColor: colors.priorityLow,
     },
     {
       id: 4,
@@ -78,7 +78,7 @@ export default function TaskDashboardSection() {
       time: "6:00 PM",
       date: "2026-02-20",
       tab: TaskTab.OVERDUE,
-      indicatorColor: "#EF4444",
+      indicatorColor: colors.priorityHigh,
     },
     {
       id: 5,
@@ -86,7 +86,7 @@ export default function TaskDashboardSection() {
       time: "7:00 AM",
       date: "2026-02-26",
       tab: TaskTab.COMPLETED,
-      indicatorColor: "#8B5CF6",
+      indicatorColor: colors.energyHigh,
     },
     {
       id: 6,
@@ -94,7 +94,7 @@ export default function TaskDashboardSection() {
       time: "6:00 AM",
       date: "2026-03-03",
       tab: TaskTab.TODAY,
-      indicatorColor: "#F472B6",
+      indicatorColor: colors.categoryPersonal,
     },
   ];
 
@@ -136,7 +136,7 @@ export default function TaskDashboardSection() {
               <Text
                 className="text-base font-semibold"
                 style={{
-                  color: isActive ? "#fff" : colors.secondaryText,
+                  color: isActive ? colors.white : colors.secondaryText,
                 }}
               >
                 {tab.label}

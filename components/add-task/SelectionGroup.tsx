@@ -94,7 +94,7 @@ export default function SelectionGroup({
                   )}
                   <Text
                     className="font-bold text-base"
-                    style={{ color: colors.text }}
+                    style={{ color: isSelected ? colors.white : colors.text }}
                   >
                     {option.label}
                   </Text>

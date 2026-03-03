@@ -41,12 +41,12 @@ export default function FloatingSegmentTabs({
                 className="mr-3"
               >
                 <LinearGradient
-                  colors={["#7C3AED", "#5B13EC"]}
+                  colors={[colors.gradientStart, colors.gradientEnd]}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   className="px-6 py-3 rounded-full"
                   style={{
-                    shadowColor: "#7C3AED",
+                    shadowColor: colors.gradientStart,
                     shadowOpacity: 0.6,
                     shadowRadius: 14,
                     shadowOffset: {
@@ -56,7 +56,7 @@ export default function FloatingSegmentTabs({
                     elevation: 10,
                   }}
                 >
-                  <Text className="text-white font-semibold text-base">
+                  <Text className="font-semibold text-base" style={{ color: colors.white }}>
                     {tab.label}
                   </Text>
                 </LinearGradient>

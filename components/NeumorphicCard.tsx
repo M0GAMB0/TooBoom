@@ -9,8 +9,8 @@ interface NeumorphicCardProps {
 export const NeumorphicCard = ({ children, colors, style }: NeumorphicCardProps) => {
   const isDark = colors.background === "#161022"; // Simple check or pass isDark prop
 
-  const darkShadowColor = isDark ? "#000" : "#c3c3c3";
-  const lightShadowColor = isDark ? "#2A1E40" : "#fdfdfd";
+  const darkShadowColor = colors.shadow;
+  const lightShadowColor = colors.shadowLight;
 
   return (
     <View

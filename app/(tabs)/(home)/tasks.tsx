@@ -104,7 +104,7 @@ export default function MyTasksScreen() {
             style={{ backgroundColor: theme.cardBackground, borderWidth: 1, borderColor: theme.borderColor }}
           >
             <Ionicons name="notifications-outline" size={24} color={theme.text} />
-            <View className="absolute top-3 right-3 w-2 h-2 rounded-full bg-red-500 border-2 border-white" />
+            <View className="absolute top-3 right-3 w-2 h-2 rounded-full" style={{ backgroundColor: theme.errorRed, borderWidth: 2, borderColor: theme.white }} />
           </TouchableOpacity>
         </View>
 
@@ -170,7 +170,7 @@ export default function MyTasksScreen() {
           elevation: 8,
         }}
       >
-        <Ionicons name="add" size={36} color="white" />
+        <Ionicons name="add" size={36} color={theme.white} />
       </TouchableOpacity>
     </SafeAreaViewContext>
   );

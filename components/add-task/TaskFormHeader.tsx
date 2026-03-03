@@ -30,7 +30,7 @@ export default function TaskFormHeader() {
         className="px-6 py-2 rounded-full"
         style={{ backgroundColor: colors.primary }}
       >
-        <Text className="text-white font-bold text-base">Save</Text>
+        <Text className="font-bold text-base" style={{ color: colors.white }}>Save</Text>
       </TouchableOpacity>
     </View>
   );

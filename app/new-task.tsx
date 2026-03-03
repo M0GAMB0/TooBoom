@@ -158,10 +158,10 @@ export default function NewTaskScreen() {
         onRequestClose={() => setIsAddingCategory(false)}
       >
         <TouchableWithoutFeedback onPress={() => setIsAddingCategory(false)}>
-          <View
-            className="flex-1 justify-end"
-            style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
-          >
+            <View
+              className="flex-1 justify-end"
+              style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+            >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View
                 className="w-full rounded-t-[40px] p-8 pb-10"
@@ -253,7 +253,7 @@ export default function NewTaskScreen() {
                     elevation: 5,
                   }}
                 >
-                  <Text className="text-white text-lg font-bold">Create Category</Text>
+                  <Text className="text-lg font-bold" style={{ color: colors.white }}>Create Category</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity

@@ -81,6 +81,10 @@ export const Colors = {
     categoryWork: workCategory,
     categoryPersonal: personalCategory,
     categoryHealth: healthCategory,
+    shadow: "#c3c3c3",
+    shadowLight: "#fdfdfd",
+    gradientStart: "#7C3AED",
+    gradientEnd: "#5B13EC",
   },
   dark: {
     text: "#ECEDEE",
@@ -117,6 +121,10 @@ export const Colors = {
     categoryWork: workCategory,
     categoryPersonal: personalCategory,
     categoryHealth: healthCategory,
+    shadow: "#000",
+    shadowLight: "#2A1E40",
+    gradientStart: "#7C3AED",
+    gradientEnd: "#5B13EC",
   },
 };
 
