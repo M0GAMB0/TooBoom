@@ -18,7 +18,10 @@ const StreakCard: React.FC<StreakCardProps> = ({ streakDays }) => {
         borderColor: colors.borderColor,
       }}
     >
-      <View className="bg-orange-500/20 w-12 h-12 rounded-xl items-center justify-center mb-4">
+      <View 
+        className="w-12 h-12 rounded-xl items-center justify-center mb-4"
+        style={{ backgroundColor: colors.streak + '33' }}
+      >
         <MaterialIcons
           name="local-fire-department"
           size={24}

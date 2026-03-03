@@ -1,5 +1,4 @@
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { Check } from "lucide-react-native";
 import { Image, Text, View } from "react-native";
 
@@ -22,24 +21,22 @@ export default function TaskCard({
   time,
   users = [],
 }: Props) {
-  const COLOR_MAP = {
-    HIGH: {
-      text: "text-customRed",
-      bg: "bg-errorRed/10",
-    },
+  const { colors } = useAppColors();
 
-    MEDIUM: {
-      text: "text-orange-500",
-      bg: "bg-orange-500/10",
-    },
-
-    LOW: {
-      text: "text-emerald-500",
-      bg: "bg-emerald-500/10",
-    },
+  const getPriorityStyle = (p: string) => {
+    switch (p) {
+      case "HIGH":
+        return { text: colors.priorityHigh, bg: colors.priorityHighBg };
+      case "MEDIUM":
+        return { text: colors.priorityMed, bg: colors.priorityMedBg };
+      case "LOW":
+        return { text: colors.priorityLow, bg: colors.priorityLowBg };
+      default:
+        return { text: colors.secondaryText, bg: colors.borderColor };
+    }
   };
-  const scheme = useColorScheme() ?? "light";
-  const colors = Colors[scheme];
+
+  const priorityStyle = priority ? getPriorityStyle(priority) : null;
 
   return (
     <View
@@ -65,7 +62,7 @@ export default function TaskCard({
           >
             {completed && <Check size={18} color={"#fff"} />}
           </View>
-
+ 
           {/* Title + Desc */}
           <View className="flex-1">
             <Text
@@ -76,7 +73,7 @@ export default function TaskCard({
             >
               {title}
             </Text>
-
+ 
             <Text
               numberOfLines={2}
               className="text-sm mt-1"
@@ -86,21 +83,23 @@ export default function TaskCard({
             </Text>
           </View>
         </View>
-
+ 
         {/* Badge */}
-        {priority && (
+        {priority && priorityStyle && (
           <View
-            className={`px-3 py-1 rounded-lg ${COLOR_MAP[priority]?.bg || ""}`}
+            className="px-3 py-1 rounded-lg"
+            style={{ backgroundColor: priorityStyle.bg }}
           >
             <Text
-              className={`text-xs font-semibold ${COLOR_MAP[priority]?.text || ""}`}
+              className="text-xs font-semibold"
+              style={{ color: priorityStyle.text }}
             >
               {priority}
             </Text>
           </View>
         )}
       </View>
-
+ 
       {/* Bottom Row */}
       {!completed && (
         <View className="flex-row items-center mt-3 justify-between">
@@ -108,7 +107,7 @@ export default function TaskCard({
           <Text className="text-sm" style={{ color: colors.secondaryText }}>
             🕒 {time}
           </Text>
-
+ 
           {/* Users */}
           <View className="flex-row">
             {users.map((user, i) => (

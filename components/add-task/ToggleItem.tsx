@@ -8,7 +8,7 @@ interface Props {
   label: string;
   description?: string;
   icon: string;
-  iconBg: string;
+  iconBg?: string;
   value: boolean;
   onValueChange: (value: boolean) => void;
 }
@@ -33,8 +33,11 @@ export default function ToggleItem({
         style={{ backgroundColor: colors.cardBackground }}
       >
         <View className="flex-row items-center flex-1">
-          <View className="p-3 rounded-2xl" style={{ backgroundColor: iconBg }}>
-            <Ionicons name={icon as any} size={22} color={colors.white} />
+          <View 
+            className="p-3 rounded-2xl" 
+            style={{ backgroundColor: iconBg || (isDark ? colors.borderColor : colors.background) }}
+          >
+            <Ionicons name={icon as any} size={22} color={colors.primary} />
           </View>
           <View className="ml-4">
             <Text className="text-base font-bold" style={{ color: colors.text }}>

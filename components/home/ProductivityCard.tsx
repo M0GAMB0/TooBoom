@@ -21,14 +21,14 @@ const ProductivityCard: React.FC<ProductivityCardProps> = ({ percentage }) => {
       <AnimatedCircularProgress
         size={90}
         width={8}
-        fill={60}
+        fill={percentage}
         tintColor={colors.primary}
         backgroundColor={colors.borderColor}
         rotation={0}
       >
         {() => (
           <Text className=" text-2xl font-bold" style={{ color: colors.text }}>
-            60%
+            {percentage}%
           </Text>
         )}
       </AnimatedCircularProgress>

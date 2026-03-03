@@ -135,7 +135,6 @@ export default function NewTaskScreen() {
           label="Remind me"
           description="Alert at due time"
           icon="notifications"
-          iconBg="#3B2E5A"
           value={remindMe}
           onValueChange={setRemindMe}
         />
@@ -144,7 +143,6 @@ export default function NewTaskScreen() {
           label="Make Habit"
           description="Repeat daily"
           icon="repeat-outline"
-          iconBg="#2E2551"
           value={makeHabit}
           onValueChange={setMakeHabit}
         />
@@ -265,7 +263,7 @@ export default function NewTaskScreen() {
                 >
                   <Text
                     className="text-lg font-semibold"
-                    style={{ color: "#475569" }}
+                    style={{ color: colors.secondaryText }}
                   >
                     Cancel
                   </Text>
