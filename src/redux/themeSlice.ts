@@ -5,10 +5,14 @@ export type ThemeMode = "light" | "dark" | "system";
 
 interface ThemeState {
   mode: ThemeMode;
+  accentColor: string;
+  fontFamily: string;
 }
 
 const initialState: ThemeState = {
   mode: "system",
+  accentColor: "#5B13EC",
+  fontFamily: "Inter_400Regular",
 };
 
 const themeSlice = createSlice({
@@ -23,8 +27,29 @@ const themeSlice = createSlice({
     loadThemeMode: (state, action: PayloadAction<ThemeMode>) => {
       state.mode = action.payload;
     },
+    setAccentColor: (state, action: PayloadAction<string>) => {
+      state.accentColor = action.payload;
+      AsyncStorage.setItem("accentColor", action.payload);
+    },
+    setFontFamily: (state, action: PayloadAction<string>) => {
+      state.fontFamily = action.payload;
+      AsyncStorage.setItem("fontFamily", action.payload);
+    },
+    loadAccentColor: (state, action: PayloadAction<string>) => {
+      state.accentColor = action.payload;
+    },
+    loadFontFamily: (state, action: PayloadAction<string>) => {
+      state.fontFamily = action.payload;
+    },
   },
 });
 
-export const { setThemeMode, loadThemeMode } = themeSlice.actions;
+export const {
+  setThemeMode,
+  loadThemeMode,
+  setAccentColor,
+  setFontFamily,
+  loadAccentColor,
+  loadFontFamily,
+} = themeSlice.actions;
 export default themeSlice.reducer;

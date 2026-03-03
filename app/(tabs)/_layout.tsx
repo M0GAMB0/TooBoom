@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Tabs } from "expo-router";
 
 export default function TabLayout() {
-  const { colors, isDark } = useAppColors();
+  const { colors, isDark, fontFamily } = useAppColors();
 
   return (
     <Tabs
@@ -19,6 +19,11 @@ export default function TabLayout() {
           borderTopWidth: 1,
           paddingTop: 10,
           height: 110,
+        },
+        tabBarLabelStyle: {
+          fontFamily: fontFamily,
+          fontSize: 12,
+          fontWeight: "600",
         },
       }}
     >

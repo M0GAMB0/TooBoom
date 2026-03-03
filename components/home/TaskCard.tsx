@@ -21,7 +21,7 @@ export default function TaskCard({
   time,
   users = [],
 }: Props) {
-  const { colors } = useAppColors();
+  const { colors, fontFamily } = useAppColors();
 
   const getPriorityStyle = (p: string) => {
     switch (p) {
@@ -69,7 +69,7 @@ export default function TaskCard({
               className={`text-base font-semibold ${
                 completed ? "line-through" : ""
               }`}
-              style={{ color: colors.text }}
+              style={{ color: colors.text, fontFamily }}
             >
               {title}
             </Text>
@@ -77,7 +77,7 @@ export default function TaskCard({
             <Text
               numberOfLines={2}
               className="text-sm mt-1"
-              style={{ color: colors.secondaryText }}
+              style={{ color: colors.secondaryText, fontFamily }}
             >
               {description}
             </Text>
@@ -92,7 +92,7 @@ export default function TaskCard({
           >
             <Text
               className="text-xs font-semibold"
-              style={{ color: priorityStyle.text }}
+              style={{ color: priorityStyle.text, fontFamily }}
             >
               {priority}
             </Text>
@@ -104,7 +104,7 @@ export default function TaskCard({
       {!completed && (
         <View className="flex-row items-center mt-3 justify-between">
           {/* Time */}
-          <Text className="text-sm" style={{ color: colors.secondaryText }}>
+          <Text className="text-sm" style={{ color: colors.secondaryText, fontFamily }}>
             🕒 {time}
           </Text>
  

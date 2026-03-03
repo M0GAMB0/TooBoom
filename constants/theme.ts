@@ -153,3 +153,17 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+export const AccentColors = [
+  { id: "purple", color: "#5B13EC" },
+  { id: "blue", color: "#3B82F6" },
+  { id: "green", color: "#10B981" },
+  { id: "pink", color: "#EC4899" },
+  { id: "orange", color: "#F59E0B" },
+];
+
+export const FontStyles = [
+  { id: "inter", name: "Inter (System Default)", value: "Inter_400Regular" },
+  { id: "merriweather", name: "Merriweather", value: "Merriweather_400Regular" },
+  { id: "roboto", name: "Roboto Mono", value: "RobotoMono_400Regular" },
+];

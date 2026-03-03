@@ -1,9 +1,9 @@
 import {
-  ProfileSection,
-  SettingItem,
-  SettingsCategory,
-  SettingsHeader,
-  SignOutButton,
+    ProfileSection,
+    SettingItem,
+    SettingsCategory,
+    SettingsHeader,
+    SignOutButton,
 } from "@/components/settings";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { useThemeMode } from "@/hooks/use-theme-mode";
@@ -48,9 +48,8 @@ export default function SettingsScreen() {
           />
           <SettingItem
             icon="color-palette-outline"
-            title="Accent Color"
-            type="color"
-            onPress={() => {}}
+            title="Appearance"
+            onPress={() => router.push("/appearance")}
           />
         </SettingsCategory>
 
