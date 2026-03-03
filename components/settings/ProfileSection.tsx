@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface ProfileSectionProps {
   name: string;
@@ -44,19 +45,19 @@ const ProfileSection: React.FC<ProfileSectionProps> = ({
       </View>
 
       <View className="ml-6">
-        <Text className="text-2xl font-bold" style={{ color: colors.text }}>
+        <AppText className="text-2xl font-bold" style={{ color: colors.text }}>
           {name}
-        </Text>
-        <Text className="text-base" style={{ color: colors.secondaryText }}>
+        </AppText>
+        <AppText className="text-base" style={{ color: colors.secondaryText }}>
           {email}
-        </Text>
+        </AppText>
         <View
           className="mt-2 self-start px-3 py-1 rounded-md"
           style={{ backgroundColor: colors.primary + "20" }}
         >
-          <Text className="text-xs font-bold" style={{ color: colors.primary }}>
+          <AppText className="text-xs font-bold" style={{ color: colors.primary }}>
             {plan}
-          </Text>
+          </AppText>
         </View>
       </View>
     </View>

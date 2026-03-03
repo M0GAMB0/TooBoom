@@ -2,7 +2,8 @@ import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 export default function TaskFormHeader() {
   const { colors } = useAppColors();
@@ -18,9 +19,9 @@ export default function TaskFormHeader() {
         <Ionicons name="arrow-back" size={24} color={colors.text} />
       </TouchableOpacity>
 
-      <Text className="text-xl font-bold" style={{ color: colors.text }}>
+      <AppText className="text-xl font-bold" style={{ color: colors.text }}>
         New Task
-      </Text>
+      </AppText>
 
       <TouchableOpacity
         onPress={() => {
@@ -30,7 +31,7 @@ export default function TaskFormHeader() {
         className="px-6 py-2 rounded-full"
         style={{ backgroundColor: colors.primary }}
       >
-        <Text className="font-bold text-base" style={{ color: colors.white }}>Save</Text>
+        <AppText className="font-bold text-base" style={{ color: colors.white }}>Save</AppText>
       </TouchableOpacity>
     </View>
   );

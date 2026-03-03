@@ -1,6 +1,7 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { Check } from "lucide-react-native";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 type Props = {
   title: string;
@@ -21,7 +22,7 @@ export default function TaskCard({
   time,
   users = [],
 }: Props) {
-  const { colors, fontFamily } = useAppColors();
+  const { colors } = useAppColors();
 
   const getPriorityStyle = (p: string) => {
     switch (p) {
@@ -65,22 +66,22 @@ export default function TaskCard({
  
           {/* Title + Desc */}
           <View className="flex-1">
-            <Text
+            <AppText
               className={`text-base font-semibold ${
                 completed ? "line-through" : ""
               }`}
-              style={{ color: colors.text, fontFamily }}
+              style={{ color: colors.text }}
             >
               {title}
-            </Text>
+            </AppText>
  
-            <Text
+            <AppText
               numberOfLines={2}
               className="text-sm mt-1"
-              style={{ color: colors.secondaryText, fontFamily }}
+              style={{ color: colors.secondaryText }}
             >
               {description}
-            </Text>
+            </AppText>
           </View>
         </View>
  
@@ -90,12 +91,12 @@ export default function TaskCard({
             className="px-3 py-1 rounded-lg"
             style={{ backgroundColor: priorityStyle.bg }}
           >
-            <Text
+            <AppText
               className="text-xs font-semibold"
-              style={{ color: priorityStyle.text, fontFamily }}
+              style={{ color: priorityStyle.text }}
             >
               {priority}
-            </Text>
+            </AppText>
           </View>
         )}
       </View>
@@ -104,9 +105,9 @@ export default function TaskCard({
       {!completed && (
         <View className="flex-row items-center mt-3 justify-between">
           {/* Time */}
-          <Text className="text-sm" style={{ color: colors.secondaryText, fontFamily }}>
+          <AppText className="text-sm" style={{ color: colors.secondaryText }}>
             🕒 {time}
-          </Text>
+          </AppText>
  
           {/* Users */}
           <View className="flex-row">

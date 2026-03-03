@@ -1,6 +1,7 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 type DailyGoalsCardProps = {
   completedTasks: number;
@@ -25,23 +26,23 @@ const DailyGoalsCard: React.FC<DailyGoalsCardProps> = ({
     >
       <View className="flex-row justify-between items-end">
         <View>
-          <Text
+          <AppText
             className="text-lg font-semibold"
             style={{ color: colors.text }}
           >
             Daily Goals
-          </Text>
-          <Text
+          </AppText>
+          <AppText
             className="text-sm mt-1"
             style={{ color: colors.secondaryText }}
           >
             {completedTasks} of {totalTasks} tasks completed
-          </Text>
+          </AppText>
         </View>
 
-        <Text className="text-base font-bold" style={{ color: colors.text }}>
+        <AppText className="text-base font-bold" style={{ color: colors.text }}>
           {percentage}%
-        </Text>
+        </AppText>
       </View>
 
       {/* Progress Bar */}

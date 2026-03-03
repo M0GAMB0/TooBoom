@@ -17,7 +17,7 @@ export default function TaskInputSection({
   description,
   setDescription,
 }: Props) {
-  const { colors, isDark } = useAppColors();
+  const { colors, fontFamily } = useAppColors();
 
   return (
     <View className="px-5 mt-4">
@@ -25,7 +25,7 @@ export default function TaskInputSection({
         className="text-3xl font-bold py-2"
         placeholder="What needs to be done?"
         placeholderTextColor={colors.secondaryText}
-        style={{ color: colors.text }}
+        style={{ color: colors.text, fontFamily }}
         value={title}
         onChangeText={setTitle}
         multiline
@@ -43,7 +43,7 @@ export default function TaskInputSection({
             className="flex-1 text-lg"
             placeholder="Add details, notes, or links..."
             placeholderTextColor={colors.secondaryText}
-            style={{ color: colors.text, minHeight: 120 }}
+            style={{ color: colors.text, minHeight: 120, fontFamily }}
             value={description}
             onChangeText={setDescription}
             multiline

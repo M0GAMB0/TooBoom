@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Switch, Text, TouchableOpacity, View } from "react-native";
+import { Switch, TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface SettingItemProps {
   icon: string;
@@ -39,21 +40,21 @@ const SettingItem: React.FC<SettingItemProps> = ({
             <MaterialIcons name={icon as any} size={22} color={colors.text} />
           )}
         </View>
-        <Text className="text-lg font-medium" style={{ color: colors.text }}>
+        <AppText className="text-lg font-medium" style={{ color: colors.text }}>
           {title}
-        </Text>
+        </AppText>
       </View>
 
       <View className="flex-row items-center">
         {type === "arrow" && (
           <>
             {value && (
-              <Text
+              <AppText
                 className="mr-2 text-base"
                 style={{ color: colors.secondaryText }}
               >
                 {value}
-              </Text>
+              </AppText>
             )}
             <Ionicons name="chevron-forward" size={18} color={colors.text} />
           </>

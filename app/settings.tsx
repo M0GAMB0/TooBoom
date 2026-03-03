@@ -5,11 +5,12 @@ import {
   SettingsHeader,
   SignOutButton,
 } from "@/components/settings";
+import { AppText } from "@/components/ui/AppText";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { useThemeMode } from "@/hooks/use-theme-mode";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { ScrollView, Text } from "react-native";
+import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
@@ -92,7 +93,6 @@ export default function SettingsScreen() {
           <SettingItem
             icon="storage"
             title="Import Data"
-            iconType="material"
             onPress={() => {}}
           />
         </SettingsCategory>
@@ -100,12 +100,12 @@ export default function SettingsScreen() {
         <SignOutButton onPress={() => {}} />
 
         {/* App Version */}
-        <Text
+        <AppText
           className="text-center text-xs mb-10"
           style={{ color: colors.secondaryText }}
         >
           Productivity App v2.4.1 (Build 842)
-        </Text>
+        </AppText>
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 type StreakCardProps = {
   streakDays: number;
@@ -30,17 +31,17 @@ const StreakCard: React.FC<StreakCardProps> = ({ streakDays }) => {
       </View>
 
       <View className="flex-row items-end items-baseline mt-[15px]">
-        <Text className="text-2xl font-bold" style={{ color: colors.text }}>
+        <AppText className="text-2xl font-bold" style={{ color: colors.text }}>
           {streakDays}
-        </Text>
-        <Text className="text-sm  ml-2" style={{ color: colors.secondaryText }}>
+        </AppText>
+        <AppText className="text-sm  ml-2" style={{ color: colors.secondaryText }}>
           Days
-        </Text>
+        </AppText>
       </View>
 
-      <Text className=" text-sm mt-1" style={{ color: colors.secondaryText }}>
+      <AppText className=" text-sm mt-1" style={{ color: colors.secondaryText }}>
         Daily Streak
-      </Text>
+      </AppText>
     </View>
   );
 };

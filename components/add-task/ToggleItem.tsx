@@ -2,7 +2,8 @@ import { NeumorphicCard } from "@/components/NeumorphicCard";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Switch, Text, View } from "react-native";
+import { Switch, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface Props {
   label: string;
@@ -33,20 +34,20 @@ export default function ToggleItem({
         style={{ backgroundColor: colors.cardBackground }}
       >
         <View className="flex-row items-center flex-1">
-          <View 
-            className="p-3 rounded-2xl" 
+          <View
+            className="p-3 rounded-2xl"
             style={{ backgroundColor: iconBg || (isDark ? colors.borderColor : colors.background) }}
           >
             <Ionicons name={icon as any} size={22} color={colors.primary} />
           </View>
           <View className="ml-4">
-            <Text className="text-base font-bold" style={{ color: colors.text }}>
+            <AppText className="text-base font-bold" style={{ color: colors.text }}>
               {label}
-            </Text>
+            </AppText>
             {description && (
-              <Text className="text-xs" style={{ color: colors.secondaryText }}>
+              <AppText className="text-xs" style={{ color: colors.secondaryText }}>
                 {description}
-              </Text>
+              </AppText>
             )}
           </View>
         </View>

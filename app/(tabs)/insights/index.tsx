@@ -1,9 +1,12 @@
-import { Text, View } from "react-native";
+import { AppText } from "@/components/ui/AppText";
+import { useAppColors } from "@/hooks/use-app-colors";
+import { View } from "react-native";
 
 export default function InsightsScreen() {
+  const { colors } = useAppColors();
   return (
     <View className="flex-1 items-center justify-center">
-      <Text className="text-xl font-bold">Analytics</Text>
+      <AppText className="text-xl font-bold" style={{ color: colors.text }}>Analytics</AppText>
     </View>
   );
 }

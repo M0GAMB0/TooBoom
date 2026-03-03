@@ -1,29 +1,20 @@
+import { AppText } from '@/components/ui/AppText';
+import { useAppColors } from "@/hooks/use-app-colors";
 import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { StatusBar, View } from 'react-native';
 
 export default function ModalScreen() {
+  const { colors } = useAppColors();
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a modal</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
+    <View 
+      className="flex-1 items-center justify-center p-5"
+      style={{ backgroundColor: colors.background }}
+    >
+      <AppText className="text-2xl font-bold" style={{ color: colors.text }}>This is a modal</AppText>
+      <Link href="/" dismissTo className="mt-4 py-4">
+        <AppText className="text-blue-500 text-lg">Go to home screen</AppText>
       </Link>
-    </ThemedView>
+      <StatusBar style="auto" />
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-});

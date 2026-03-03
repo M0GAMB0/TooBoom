@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface SignOutButtonProps {
   onPress: () => void;
@@ -21,9 +22,9 @@ const SignOutButton: React.FC<SignOutButtonProps> = ({ onPress }) => {
       onPress={onPress}
     >
       <MaterialIcons name="logout" size={24} color={colors.errorRed} />
-      <Text className="ml-2 text-lg font-bold" style={{ color: colors.errorRed }}>
+      <AppText className="ml-2 text-lg font-bold" style={{ color: colors.errorRed }}>
         Sign Out
-      </Text>
+      </AppText>
     </TouchableOpacity>
   );
 };

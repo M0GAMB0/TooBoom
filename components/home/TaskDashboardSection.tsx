@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { ChevronRight } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 /* ---------------- TAB TYPES ---------------- */
 
@@ -131,14 +132,14 @@ export default function TaskDashboardSection() {
                 borderColor: isActive ? colors.primary : colors.borderColor,
               }}
             >
-              <Text
+              <AppText
                 className="text-base font-semibold"
                 style={{
                   color: isActive ? colors.white : colors.secondaryText,
                 }}
               >
                 {tab.label}
-              </Text>
+              </AppText>
             </TouchableOpacity>
           );
         })}
@@ -162,21 +163,21 @@ export default function TaskDashboardSection() {
               />
 
               <View>
-                <Text
+                <AppText
                   className="text-lg font-semibold"
                   style={{ color: colors.text }}
                 >
                   {task.title}
-                </Text>
+                </AppText>
 
-                <Text
+                <AppText
                   className="text-base mt-1"
                   style={{
                     color: colors.secondaryText,
                   }}
                 >
                   {task.date}, {task.time}
-                </Text>
+                </AppText>
               </View>
             </View>
 

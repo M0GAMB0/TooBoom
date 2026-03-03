@@ -1,7 +1,7 @@
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface CategoryHeaderProps {
   title: string;
@@ -10,8 +10,7 @@ interface CategoryHeaderProps {
 }
 
 export const CategoryHeader = ({ title, count, color }: CategoryHeaderProps) => {
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { colors } = useAppColors();
 
   return (
     <View className="flex-row items-center justify-between mt-6 mb-4 px-2">
@@ -20,23 +19,23 @@ export const CategoryHeader = ({ title, count, color }: CategoryHeaderProps) => 
           className="w-3 h-3 rounded-full mr-3"
           style={{ backgroundColor: color }}
         />
-        <Text 
+        <AppText 
           className="text-2xl font-bold"
-          style={{ color: theme.text }}
+          style={{ color: colors.text }}
         >
           {title}
-        </Text>
+        </AppText>
       </View>
       <View 
         className="px-3 py-1 rounded-full"
-        style={{ backgroundColor: theme.borderColor }}
+        style={{ backgroundColor: colors.borderColor }}
       >
-        <Text 
+        <AppText 
           className="text-sm font-bold"
-          style={{ color: theme.secondaryText }}
+          style={{ color: colors.secondaryText }}
         >
           {count}
-        </Text>
+        </AppText>
       </View>
     </View>
   );

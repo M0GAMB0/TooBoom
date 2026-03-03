@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import { AppText } from "../ui/AppText";
 
 type ProductivityCardProps = {
   percentage: number;
@@ -27,15 +28,15 @@ const ProductivityCard: React.FC<ProductivityCardProps> = ({ percentage }) => {
         rotation={0}
       >
         {() => (
-          <Text className=" text-2xl font-bold" style={{ color: colors.text }}>
+          <AppText className=" text-2xl font-bold" style={{ color: colors.text }}>
             {percentage}%
-          </Text>
+          </AppText>
         )}
       </AnimatedCircularProgress>
 
-      <Text className="text-sm mt-3" style={{ color: colors.secondaryText }}>
+      <AppText className="text-sm mt-3" style={{ color: colors.secondaryText }}>
         Productivity
-      </Text>
+      </AppText>
     </View>
   );
 };

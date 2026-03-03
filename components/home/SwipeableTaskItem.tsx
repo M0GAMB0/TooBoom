@@ -1,13 +1,12 @@
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { Pin, Star } from "lucide-react-native";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
+import { AppText } from "../ui/AppText";
 
 export default function SwipeableTaskItem({ task }: any) {
-  const scheme = useColorScheme() ?? "light";
-  const colors = Colors[scheme];
+  const { colors } = useAppColors();
 
   const renderRight = () => (
     <View className="flex-row">
@@ -38,21 +37,21 @@ export default function SwipeableTaskItem({ task }: any) {
           />
 
           <View>
-            <Text
+            <AppText
               className="text-lg font-semibold"
               style={{ color: colors.text }}
             >
               {task.title}
-            </Text>
+            </AppText>
 
-            <Text
+            <AppText
               className="text-base mt-1"
               style={{
                 color: colors.secondaryText,
               }}
             >
               {task.date}, {task.time}
-            </Text>
+            </AppText>
           </View>
         </View>
       </View>

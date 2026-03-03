@@ -2,7 +2,8 @@ import { NeumorphicCard } from "@/components/NeumorphicCard";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface Option {
   label: string;
@@ -25,16 +26,16 @@ export default function SelectionGroup({
   onSelect,
   onAddPress,
 }: Props) {
-  const { colors, isDark } = useAppColors();
+  const { colors } = useAppColors();
 
   return (
     <View className="px-5  mt-6">
-      <Text
+      <AppText
         className="text-base font-semibold mb-3"
         style={{ color: colors.secondaryText }}
       >
         {label}
-      </Text>
+      </AppText>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -43,31 +44,6 @@ export default function SelectionGroup({
         <View className="flex-row items-center">
           {options.map((option) => {
             const isSelected = selectedValue === option.value;
-            // if (isSelected) {
-            //   return (
-            //     <TouchableOpacity
-            //       key={option.value}
-            //       onPress={() => onSelect(option.value)}
-            //       className="px-6 py-3 rounded-2xl mr-4 flex-row items-center"
-            //       style={{
-            //         backgroundColor: colors.primary,
-            //         borderWidth: 1,
-            //         borderColor: colors.primary,
-            //       }}
-            //     >
-            //       {option.icon && (
-            //         <Text className="mr-2" style={{ color: "white" }}>
-            //           {option.icon}
-            //         </Text>
-            //       )}
-            //       <Text
-            //         className="font-bold text-base text-white"
-            //       >
-            //         {option.label}
-            //       </Text>
-            //     </TouchableOpacity>
-            //   );
-            // }
 
             return (
               <NeumorphicCard
@@ -85,19 +61,19 @@ export default function SelectionGroup({
                   }}
                 >
                   {option.icon && (
-                    <Text
+                    <AppText
                       className="mr-2"
-                      style={{ color: colors.text }}
+                      style={{ color: isSelected ? colors.white : colors.text }}
                     >
                       {option.icon}
-                    </Text>
+                    </AppText>
                   )}
-                  <Text
+                  <AppText
                     className="font-bold text-base"
                     style={{ color: isSelected ? colors.white : colors.text }}
                   >
                     {option.label}
-                  </Text>
+                  </AppText>
                 </TouchableOpacity>
               </NeumorphicCard>
             );

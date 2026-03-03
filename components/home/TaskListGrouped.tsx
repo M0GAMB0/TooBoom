@@ -1,12 +1,11 @@
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { AppText } from "../ui/AppText";
 import SwipeableTaskItem from "./SwipeableTaskItem";
 
 export default function TaskListGrouped({ tasks }: any) {
-  const scheme = useColorScheme() ?? "light";
-  const colors = Colors[scheme];
+  const { colors } = useAppColors();
 
   const grouped = tasks.reduce((acc: any, task: any) => {
     if (!acc[task.date]) acc[task.date] = [];
@@ -18,14 +17,14 @@ export default function TaskListGrouped({ tasks }: any) {
     <View>
       {Object.keys(grouped).map((date) => (
         <View key={date}>
-          <Text
+          <AppText
             className="mb-2 mt-3 font-semibold"
             style={{
               color: colors.secondaryText,
             }}
           >
             {date}
-          </Text>
+          </AppText>
 
           {grouped[date].map((task: any) => (
             <SwipeableTaskItem key={task.id} task={task} />

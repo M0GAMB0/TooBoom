@@ -1,7 +1,8 @@
 import { NeumorphicCard } from "@/components/NeumorphicCard";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface QuickActionsRowProps {
   colors: any;
@@ -20,9 +21,9 @@ const QuickActionsRow: React.FC<QuickActionsRowProps> = ({ colors }) => {
             size={20}
             color={colors.primary}
           />
-          <Text className="ml-2 font-bold" style={{ color: colors.text }}>
+          <AppText className="ml-2 font-bold" style={{ color: colors.text }}>
             Today
-          </Text>
+          </AppText>
         </TouchableOpacity>
       </NeumorphicCard>
 
@@ -32,9 +33,9 @@ const QuickActionsRow: React.FC<QuickActionsRowProps> = ({ colors }) => {
           style={{ backgroundColor: colors.cardBackground }}
         >
           <Ionicons name="time-outline" size={20} color={colors.primary} />
-          <Text className="ml-2 font-bold" style={{ color: colors.text }}>
+          <AppText className="ml-2 font-bold" style={{ color: colors.text }}>
             10:00 AM
-          </Text>
+          </AppText>
         </TouchableOpacity>
       </NeumorphicCard>
 
@@ -44,9 +45,9 @@ const QuickActionsRow: React.FC<QuickActionsRowProps> = ({ colors }) => {
           style={{ backgroundColor: colors.cardBackground }}
         >
           <Ionicons name="flag-outline" size={20} color={colors.primary} />
-          <Text className="ml-2 font-bold" style={{ color: colors.text }}>
+          <AppText className="ml-2 font-bold" style={{ color: colors.text }}>
             Priority
-          </Text>
+          </AppText>
         </TouchableOpacity>
       </NeumorphicCard>
     </View>

@@ -1,27 +1,27 @@
 import {
-  DifficultyEnergySection,
-  QuickActionsRow,
-  SelectionGroup,
-  SubtaskList,
-  TaskFormHeader,
-  TaskInputSection,
-  ToggleItem,
+    DifficultyEnergySection,
+    QuickActionsRow,
+    SelectionGroup,
+    SubtaskList,
+    TaskFormHeader,
+    TaskInputSection,
+    ToggleItem,
 } from "@/components/add-task";
 
+import { AppText } from "@/components/ui/AppText";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { addCategory } from "@/src/redux/categorySlice";
 import { RootState } from "@/src/redux/store";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  Keyboard,
-  Modal,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View
+    Keyboard,
+    Modal,
+    ScrollView,
+    TextInput,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ import { useDispatch, useSelector } from "react-redux";
 const COLORS = ["#6366f1", "#a855f7", "#3b82f6", "#10b981", "#f87171", "#fbbf24"];
 
 export default function NewTaskScreen() {
-  const { colors } = useAppColors();
+  const { colors, fontFamily } = useAppColors();
   const router = useRouter();
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories.categories);
@@ -102,9 +102,9 @@ export default function NewTaskScreen() {
             className="px-6 py-2 rounded-full"
             style={{ backgroundColor: colors.primary }}
           >
-            <Text className="font-bold text-base" style={{ color: colors.white }}>
+            <AppText className="font-bold text-base" style={{ color: colors.white }}>
               Save
-            </Text>
+            </AppText>
           </TouchableOpacity>
         }
       /> */}
@@ -196,26 +196,26 @@ export default function NewTaskScreen() {
                   />
                 </View>
 
-                <Text
+                <AppText
                   className="text-2xl font-bold text-center mb-1"
                   style={{ color: colors.text }}
                 >
                   Add New Category
-                </Text>
-                <Text
+                </AppText>
+                <AppText
                   className="text-sm text-center mb-8"
                   style={{ color: colors.secondaryText }}
                 >
                   Organize your tasks efficiently
-                </Text>
+                </AppText>
 
                 <View className="mb-6">
-                  <Text
+                  <AppText
                     className="text-sm font-semibold mb-3"
                     style={{ color: colors.text }}
                   >
                     Category Name
-                  </Text>
+                  </AppText>
                   <TextInput
                     autoFocus
                     className="h-14 rounded-2xl px-5 text-base"
@@ -224,6 +224,7 @@ export default function NewTaskScreen() {
                       color: colors.text,
                       borderWidth: 1,
                       borderColor: colors.borderColor,
+                      fontFamily
                     }}
                     placeholder="e.g. Personal Projects"
                     placeholderTextColor={colors.secondaryText}
@@ -233,12 +234,12 @@ export default function NewTaskScreen() {
                 </View>
 
                 <View className="mb-10">
-                  <Text
+                  <AppText
                     className="text-sm font-semibold mb-4"
                     style={{ color: colors.text }}
                   >
                     Select Color
-                  </Text>
+                  </AppText>
                   <View className="flex-row justify-between">
                     {COLORS.map((color) => (
                       <TouchableOpacity
@@ -274,7 +275,7 @@ export default function NewTaskScreen() {
                     elevation: 5,
                   }}
                 >
-                  <Text className="text-lg font-bold" style={{ color: colors.white }}>Create Category</Text>
+                  <AppText className="text-lg font-bold" style={{ color: colors.white }}>Create Category</AppText>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -282,12 +283,12 @@ export default function NewTaskScreen() {
                   className="h-16 rounded-2xl items-center justify-center"
                   style={{ backgroundColor: colors.background }}
                 >
-                  <Text
+                  <AppText
                     className="text-lg font-semibold"
                     style={{ color: colors.secondaryText }}
                   >
                     Cancel
-                  </Text>
+                  </AppText>
                 </TouchableOpacity>
               </View>
             </TouchableWithoutFeedback>

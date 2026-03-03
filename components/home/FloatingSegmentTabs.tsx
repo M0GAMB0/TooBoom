@@ -1,8 +1,8 @@
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 type TabType = {
   key: string;
@@ -20,8 +20,7 @@ export default function FloatingSegmentTabs({
   activeTab,
   onChange,
 }: Props) {
-  const scheme = useColorScheme() ?? "light";
-  const colors = Colors[scheme];
+  const { colors } = useAppColors();
 
   return (
     <ScrollView
@@ -56,9 +55,9 @@ export default function FloatingSegmentTabs({
                     elevation: 10,
                   }}
                 >
-                  <Text className="font-semibold text-base" style={{ color: colors.white }}>
+                  <AppText className="font-semibold text-base" style={{ color: colors.white }}>
                     {tab.label}
-                  </Text>
+                  </AppText>
                 </LinearGradient>
               </TouchableOpacity>
             );
@@ -75,14 +74,14 @@ export default function FloatingSegmentTabs({
                 borderColor: colors.borderColor,
               }}
             >
-              <Text
+              <AppText
                 className="font-semibold text-base"
                 style={{
                   color: colors.secondaryText,
                 }}
               >
                 {tab.label}
-              </Text>
+              </AppText>
             </TouchableOpacity>
           );
         })}

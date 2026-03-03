@@ -5,8 +5,9 @@ import TaskDashboardSection from "@/components/home/TaskDashboardSection";
 import { FAB } from "@/components/ui/FAB";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { navigateToNewTask } from "@/src/utils/navigation";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { AppText } from "../ui/AppText";
 
 export default function HomeScreen() {
   const { colors } = useAppColors();
@@ -23,14 +24,14 @@ export default function HomeScreen() {
             <StatsSection streakDays={12} completedTasks={7} totalTasks={8} />
 
             <View className="flex-row justify-between items-center mb-5 mt-4">
-              <Text
+              <AppText
                 className="text-[22px] font-bold"
                 style={{ color: colors.text }}
               >
                 Daily Mission
-              </Text>
+              </AppText>
 
-              <Text style={{ color: colors.primary }}>View all</Text>
+              <AppText style={{ color: colors.primary }}>View all</AppText>
             </View>
             <TaskCardWrapper />
             <TaskDashboardSection />

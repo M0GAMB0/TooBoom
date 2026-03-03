@@ -1,4 +1,5 @@
 import { SettingsHeader } from "@/components/settings";
+import { AppText } from "@/components/ui/AppText";
 import { AccentColors, FontStyles } from "@/constants/theme";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { useThemeMode } from "@/hooks/use-theme-mode";
@@ -7,14 +8,13 @@ import React, { useState } from "react";
 import {
     ScrollView,
     StyleSheet,
-    Text,
     TouchableOpacity,
     View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AppearanceScreen() {
-  const { colors, isDark, fontFamily } = useAppColors();
+  const { colors, isDark } = useAppColors();
   const { mode, setMode, accentColor, setAccent, fontFamily: currentFont, setFont } = useThemeMode();
   const router = useRouter();
 
@@ -40,12 +40,12 @@ export default function AppearanceScreen() {
 
         <View>
             {/* ACCENT COLOR */}
-            <Text
+            <AppText
               className="text-xs font-bold mb-4 uppercase tracking-widest"
-              style={{ color: colors.text, fontFamily }}
+              style={{ color: colors.text }}
             >
               Accent Color
-            </Text>
+            </AppText>
             <View
               className="flex-row justify-around items-center p-6 rounded-3xl mb-8"
               style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
@@ -67,12 +67,12 @@ export default function AppearanceScreen() {
               ))}
             </View>
             {/* FONT STYLE */}
-            <Text
+            <AppText
               className="text-xs font-bold mb-4 uppercase tracking-widest"
-              style={{ color: colors.text, fontFamily }}
+              style={{ color: colors.text }}
             >
               Font Style
-            </Text>
+            </AppText>
             <View
               className="rounded-3xl mb-10"
               style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
@@ -86,9 +86,9 @@ export default function AppearanceScreen() {
                   }`}
                   style={{ borderBottomColor: colors.borderColor }}
                 >
-                  <Text style={{ color: colors.text, fontFamily: font.value, fontSize: 16 }}>
+                  <AppText style={{ color: colors.text, fontFamily: font.value, fontSize: 16 }}>
                     {font.name}
-                  </Text>
+                  </AppText>
                   <View
                     style={[
                       styles.radioOuter,
@@ -107,12 +107,12 @@ export default function AppearanceScreen() {
         {/* SAVE BUTTON */}
         <TouchableOpacity
           onPress={handleSave}
-          className="py-5 rounded-2xl items-center mb-10"
+          className="py-4 rounded-2xl items-center mb-12"
           style={{ backgroundColor: colors.primary }}
         >
-          <Text className="text-white font-bold text-lg" style={{ fontFamily }}>
+          <AppText className="text-white font-bold text-lg">
             Save Changes
-          </Text>
+          </AppText>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>

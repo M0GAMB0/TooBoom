@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
+import { AppText } from "../ui/AppText";
 
 interface TaskCardProps {
   title: string;
@@ -65,12 +66,12 @@ export const TaskCard = ({
               {isCompleted && <Ionicons name="checkmark" size={18} color={colors.white} />}
             </View>
           </TouchableOpacity>
-          <Text 
+          <AppText 
             className={`text-lg font-semibold flex-1 ${isCompleted ? 'line-through opacity-50' : ''}`}
             style={{ color: colors.text }}
           >
             {title}
-          </Text>
+          </AppText>
         </View>
         
         <TouchableOpacity onPress={onToggleStar}>
@@ -90,13 +91,13 @@ export const TaskCard = ({
         {time && (
           <View className="flex-row items-center mr-4">
             <Ionicons name="time-outline" size={16} color={colors.secondaryText} />
-            <Text className="ml-1 text-sm" style={{ color: colors.secondaryText }}>{time}</Text>
+            <AppText className="ml-1 text-sm" style={{ color: colors.secondaryText }}>{time}</AppText>
           </View>
         )}
         {location && (
           <View className="flex-row items-center">
             <Ionicons name="location-outline" size={16} color={colors.secondaryText} />
-            <Text className="ml-1 text-sm" style={{ color: colors.secondaryText }}>{location}</Text>
+            <AppText className="ml-1 text-sm" style={{ color: colors.secondaryText }}>{location}</AppText>
           </View>
         )}
       </View>
@@ -107,9 +108,9 @@ export const TaskCard = ({
             className="px-3 py-1 rounded-lg"
             style={{ backgroundColor: priorityStyle?.bg }}
           >
-            <Text className="text-xs font-bold" style={{ color: priorityStyle?.text }}>
+            <AppText className="text-xs font-bold" style={{ color: priorityStyle?.text }}>
               {priority === "high" ? "High Priority" : priority === "med" ? "Med Priority" : "Low Priority"}
-            </Text>
+            </AppText>
           </View>
         )}
         {energy && (
@@ -117,10 +118,10 @@ export const TaskCard = ({
             className="px-3 py-1 rounded-lg flex-row items-center"
             style={{ backgroundColor: energy === "high" ? colors.energyHighBg : colors.energyLowBg }}
           >
-             <Text className="mr-1">{energy === "high" ? "🧠" : "⚡️"}</Text>
-            <Text className="text-xs font-bold" style={{ color: energy === "high" ? colors.energyHigh : colors.energyLow }}>
+             <AppText className="mr-1">{energy === "high" ? "🧠" : "⚡️"}</AppText>
+            <AppText className="text-xs font-bold" style={{ color: energy === "high" ? colors.energyHigh : colors.energyLow }}>
               {energy === "high" ? "High Energy" : "Low Energy"}
-            </Text>
+            </AppText>
           </View>
         )}
         {difficulty && (
@@ -128,9 +129,9 @@ export const TaskCard = ({
             className="px-3 py-1 rounded-lg flex-row items-center"
             style={{ backgroundColor: difficulty === "hard" ? colors.difficultyHardBg : colors.difficultyMedBg }}
           >
-            <Text className="text-xs font-bold" style={{ color: difficulty === "hard" ? colors.difficultyHard : colors.difficultyMed }}>
+            <AppText className="text-xs font-bold" style={{ color: difficulty === "hard" ? colors.difficultyHard : colors.difficultyMed }}>
               {difficulty === "hard" ? "Hard" : "Med Difficulty"}
-            </Text>
+            </AppText>
           </View>
         )}
       </View>

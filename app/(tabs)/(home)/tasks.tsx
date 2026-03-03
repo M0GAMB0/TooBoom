@@ -2,11 +2,11 @@ import { CategoryHeader } from "@/components/tasks/CategoryHeader";
 import { FilterChip } from "@/components/tasks/FilterChip";
 import { TaskCard } from "@/components/tasks/TaskCard";
 import { TaskSearchBar } from "@/components/tasks/TaskSearchBar";
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { AppText } from "@/components/ui/AppText";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { ScrollView, StatusBar, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StatusBar, TouchableOpacity, View } from "react-native";
 import { SafeAreaView as SafeAreaViewContext } from "react-native-safe-area-context";
 
 // Define Task type to ensure consistency with TaskCardProps
@@ -81,30 +81,29 @@ const MOCK_TASKS: Record<string, TaskItem[]> = {
 };
 
 export default function MyTasksScreen() {
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { colors, isDark } = useAppColors();
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("Today");
 
   const filters = ["Today", "Upcoming", "Pending", "Completed"];
 
   return (
-    <SafeAreaViewContext style={{ flex: 1, backgroundColor: theme.background }}>
-      <StatusBar barStyle={colorScheme === "dark" ? "light-content" : "dark-content"} />
+    <SafeAreaViewContext style={{ flex: 1, backgroundColor: colors.background }}>
+      <StatusBar barStyle={isDark ? "light-content" : "dark-content"} />
       
       <View className="flex-1 px-5 pt-4">
         {/* Header */}
         <View className="flex-row items-center justify-between mb-6">
           <View>
-            <Text className="text-lg opacity-60 font-medium" style={{ color: theme.text }}>Good Morning,</Text>
-            <Text className="text-4xl font-bold" style={{ color: theme.text }}>My Tasks</Text>
+            <AppText className="text-lg opacity-60 font-medium" style={{ color: colors.text }}>Good Morning,</AppText>
+            <AppText className="text-4xl font-bold" style={{ color: colors.text }}>My Tasks</AppText>
           </View>
           <TouchableOpacity 
             className="p-3 rounded-full"
-            style={{ backgroundColor: theme.cardBackground, borderWidth: 1, borderColor: theme.borderColor }}
+            style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
           >
-            <Ionicons name="notifications-outline" size={24} color={theme.text} />
-            <View className="absolute top-3 right-3 w-2 h-2 rounded-full" style={{ backgroundColor: theme.errorRed, borderWidth: 2, borderColor: theme.white }} />
+            <Ionicons name="notifications-outline" size={24} color={colors.text} />
+            <View className="absolute top-3 right-3 w-2 h-2 rounded-full" style={{ backgroundColor: colors.errorRed, borderWidth: 2, borderColor: colors.white }} />
           </TouchableOpacity>
         </View>
 
@@ -130,7 +129,7 @@ export default function MyTasksScreen() {
           <CategoryHeader 
             title="Work" 
             count={MOCK_TASKS.Work.length} 
-            color={theme.categoryWork} 
+            color={colors.categoryWork} 
           />
           {MOCK_TASKS.Work.map(task => (
             <TaskCard key={task.id} {...task} />
@@ -139,7 +138,7 @@ export default function MyTasksScreen() {
           <CategoryHeader 
             title="Personal" 
             count={MOCK_TASKS.Personal.length} 
-            color={theme.categoryPersonal} 
+            color={colors.categoryPersonal} 
           />
           {MOCK_TASKS.Personal.map(task => (
             <TaskCard key={task.id} {...task} />
@@ -148,7 +147,7 @@ export default function MyTasksScreen() {
           <CategoryHeader 
             title="Health" 
             count={MOCK_TASKS.Health.filter(t => !t.isCompleted).length} 
-            color={theme.categoryHealth} 
+            color={colors.categoryHealth} 
           />
           {MOCK_TASKS.Health.filter(t => !t.isCompleted).map(task => (
             <TaskCard key={task.id} {...task} />
@@ -162,15 +161,15 @@ export default function MyTasksScreen() {
       <TouchableOpacity 
         className="absolute bottom-10 right-8 w-16 h-16 rounded-full items-center justify-center shadow-lg"
         style={{ 
-          backgroundColor: theme.primary,
-          shadowColor: theme.primary,
+          backgroundColor: colors.primary,
+          shadowColor: colors.primary,
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.4,
           shadowRadius: 10,
           elevation: 8,
         }}
       >
-        <Ionicons name="add" size={36} color={theme.white} />
+        <Ionicons name="add" size={36} color={colors.white} />
       </TouchableOpacity>
     </SafeAreaViewContext>
   );
