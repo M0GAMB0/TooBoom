@@ -36,77 +36,78 @@ export default function AppearanceScreen() {
     >
       <SettingsHeader title="Appearance" onBackPress={() => router.back()} />
 
-      <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-4 py-4">
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ justifyContent: "space-between", borderWidth: 1, borderColor: colors.borderColor, flex: 1 }} className="flex-1  px-4 py-4">
 
-        {/* ACCENT COLOR */}
-        <Text
-          className="text-xs font-bold mb-4 uppercase tracking-widest"
-          style={{ color: colors.text, fontFamily }}
-        >
-          Accent Color
-        </Text>
-        <View
-          className="flex-row justify-around items-center p-6 rounded-3xl mb-8"
-          style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
-        >
-          {AccentColors.map((item) => (
-            <TouchableOpacity
-              key={item.id}
-              onPress={() => setTempAccent(item.color)}
-              style={[
-                styles.colorCircle,
-                { backgroundColor: item.color },
-                tempAccent === item.color && { borderColor: colors.primary, borderWidth: 3 },
-              ]}
+        <View>
+            {/* ACCENT COLOR */}
+            <Text
+              className="text-xs font-bold mb-4 uppercase tracking-widest"
+              style={{ color: colors.text, fontFamily }}
             >
-              {tempAccent === item.color && (
-                <View style={[styles.activeRing, { borderColor: item.color }]} />
-              )}
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        {/* FONT STYLE */}
-        <Text
-          className="text-xs font-bold mb-4 uppercase tracking-widest"
-          style={{ color: colors.text, fontFamily }}
-        >
-          Font Style
-        </Text>
-        <View
-          className="rounded-3xl mb-10"
-          style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
-        >
-          {FontStyles.map((font, index) => (
-            <TouchableOpacity
-              key={font.id}
-              onPress={() => setTempFont(font.value)}
-              className={`flex-row items-center justify-between p-5 ${
-                index !== FontStyles.length - 1 ? "border-b" : ""
-              }`}
-              style={{ borderBottomColor: colors.borderColor }}
+              Accent Color
+            </Text>
+            <View
+              className="flex-row justify-around items-center p-6 rounded-3xl mb-8"
+              style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
             >
-              <Text style={{ color: colors.text, fontFamily: font.value, fontSize: 16 }}>
-                {font.name}
-              </Text>
-              <View
-                style={[
-                  styles.radioOuter,
-                  { borderColor: tempFont === font.value ? colors.primary : colors.secondaryText },
-                ]}
-              >
-                {tempFont === font.value && (
-                  <View style={[styles.radioInner, { backgroundColor: colors.primary }]} />
-                )}
-              </View>
-            </TouchableOpacity>
-          ))}
+              {AccentColors.map((item) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => setTempAccent(item.color)}
+                  style={[
+                    styles.colorCircle,
+                    { backgroundColor: item.color },
+                    tempAccent === item.color && { borderColor: colors.primary, borderWidth: 3 },
+                  ]}
+                >
+                  {tempAccent === item.color && (
+                    <View style={[styles.activeRing, { borderColor: item.color }]} />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+            {/* FONT STYLE */}
+            <Text
+              className="text-xs font-bold mb-4 uppercase tracking-widest"
+              style={{ color: colors.text, fontFamily }}
+            >
+              Font Style
+            </Text>
+            <View
+              className="rounded-3xl mb-10"
+              style={{ backgroundColor: colors.cardBackground, borderWidth: 1, borderColor: colors.borderColor }}
+            >
+              {FontStyles.map((font, index) => (
+                <TouchableOpacity
+                  key={font.id}
+                  onPress={() => setTempFont(font.value)}
+                  className={`flex-row items-center justify-between p-5 ${
+                    index !== FontStyles.length - 1 ? "border-b" : ""
+                  }`}
+                  style={{ borderBottomColor: colors.borderColor }}
+                >
+                  <Text style={{ color: colors.text, fontFamily: font.value, fontSize: 16 }}>
+                    {font.name}
+                  </Text>
+                  <View
+                    style={[
+                      styles.radioOuter,
+                      { borderColor: tempFont === font.value ? colors.primary : colors.secondaryText },
+                    ]}
+                  >
+                    {tempFont === font.value && (
+                      <View style={[styles.radioInner, { backgroundColor: colors.primary }]} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
         </View>
 
         {/* SAVE BUTTON */}
         <TouchableOpacity
           onPress={handleSave}
-          className="py-4 rounded-2xl items-center mb-10"
+          className="py-5 rounded-2xl items-center mb-10"
           style={{ backgroundColor: colors.primary }}
         >
           <Text className="text-white font-bold text-lg" style={{ fontFamily }}>
@@ -115,47 +116,6 @@ export default function AppearanceScreen() {
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
-  );
-}
-
-function ModeCard({ title, isActive, onPress, colors, isDark, fontFamily }: any) {
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{ width: "47%" }}
-      activeOpacity={0.8}
-    >
-      <View
-        className="rounded-3xl p-4 aspect-[4/5] justify-between relative"
-        style={{
-          backgroundColor: isDark ? "#1F182F" : "#fff",
-          borderWidth: 2,
-          borderColor: isActive ? colors.primary : colors.borderColor,
-        }}
-      >
-        {/* Mock Content */}
-        <View className="space-y-2">
-          <View className="h-2 w-20 rounded-full" style={{ backgroundColor: isDark ? "#2D2342" : "#F3F4F6" }} />
-          <View className="h-16 w-full rounded-xl" style={{ backgroundColor: isDark ? "#161022" : "#F9FAFB", borderWidth: 1, borderColor: isDark ? "#2D2342" : "#F3F4F6" }} />
-          <View className="h-2 w-12 rounded-full" style={{ backgroundColor: isDark ? "#2D2342" : "#F3F4F6" }} />
-        </View>
-
-        <View className="items-center">
-            <View 
-                className="w-8 h-8 rounded-full border-2 items-center justify-center"
-                style={{ borderColor: isActive ? colors.primary : colors.borderColor }}
-            >
-                {isActive && <View className="w-5 h-5 rounded-full" style={{ backgroundColor: colors.primary }} />}
-            </View>
-        </View>
-      </View>
-      <Text
-        className="text-center mt-3 font-medium"
-        style={{ color: isActive ? colors.primary : colors.secondaryText, fontFamily }}
-      >
-        {title}
-      </Text>
-    </TouchableOpacity>
   );
 }
 

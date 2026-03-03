@@ -1,9 +1,9 @@
 import {
-    ProfileSection,
-    SettingItem,
-    SettingsCategory,
-    SettingsHeader,
-    SignOutButton,
+  ProfileSection,
+  SettingItem,
+  SettingsCategory,
+  SettingsHeader,
+  SignOutButton,
 } from "@/components/settings";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { useThemeMode } from "@/hooks/use-theme-mode";
@@ -77,7 +77,7 @@ export default function SettingsScreen() {
             onPress={() => setAppLock(!appLock)}
           />
           <SettingItem
-            icon="dialpad-outline"
+            icon="keypad-outline"
             title="Change PIN"
             onPress={() => {}}
           />
