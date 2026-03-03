@@ -1,6 +1,6 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 interface FilterChipProps {
   label: string;
@@ -21,12 +21,12 @@ export const FilterChip = ({ label, isActive, onPress }: FilterChipProps) => {
           : { backgroundColor: colors.cardBackground, borderColor: colors.borderColor }
       ]}
     >
-      <Text
+      {/* <Text
         className="font-semibold text-base"
         style={{ color: isActive ? "white" : colors.secondaryText }}
       >
         {label}
-      </Text>
+      </Text> */}
     </TouchableOpacity>
   );
 };

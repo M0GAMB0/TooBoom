@@ -7,9 +7,11 @@ import {
   TaskInputSection,
   ToggleItem,
 } from "@/components/add-task";
+
 import { useAppColors } from "@/hooks/use-app-colors";
 import { addCategory } from "@/src/redux/categorySlice";
 import { RootState } from "@/src/redux/store";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Keyboard,
@@ -28,6 +30,7 @@ const COLORS = ["#6366f1", "#a855f7", "#3b82f6", "#10b981", "#f87171", "#fbbf24"
 
 export default function NewTaskScreen() {
   const { colors } = useAppColors();
+  const router = useRouter();
   const dispatch = useDispatch();
   const categories = useSelector((state: RootState) => state.categories.categories);
 
@@ -87,6 +90,24 @@ export default function NewTaskScreen() {
       className="flex-1"
       style={{ backgroundColor: colors.background }}
     >
+      {/* <Header
+        title="New Task"
+        backButtonType="circular"
+        rightElement={
+          <TouchableOpacity
+            onPress={() => {
+
+              router.back();
+            }}
+            className="px-6 py-2 rounded-full"
+            style={{ backgroundColor: colors.primary }}
+          >
+            <Text className="font-bold text-base" style={{ color: colors.white }}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        }
+      /> */}
       <TaskFormHeader />
 
       <ScrollView

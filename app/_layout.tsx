@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import "../global.css";
 
 import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { store } from "@/src/redux/store";
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
@@ -19,8 +19,8 @@ export const unstable_settings = {
   anchor: "(tabs)",
 };
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+function ThemedLayout() {
+  const { colors, isDark } = useAppColors();
   const modalOptions = { presentation: "modal", title: "Modal" } as const;
 
   const CustomDarkTheme = {
@@ -41,31 +41,38 @@ export default function RootLayout() {
     },
   };
 
-  const theme = colorScheme === "dark" ? CustomDarkTheme : CustomDefaultTheme;
+  const theme = isDark ? CustomDarkTheme : CustomDefaultTheme;
 
   useEffect(() => {
-    SystemUI.setBackgroundColorAsync(theme.colors.background);
-  }, [theme]);
+    SystemUI.setBackgroundColorAsync(colors.background);
+  }, [colors.background]);
 
   return (
+    <ThemeProvider value={theme}>
+      <Stack
+        screenOptions={{
+          contentStyle: {
+            backgroundColor: theme.colors.background,
+          },
+        }}
+      >
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="modal" options={modalOptions} />
+        <Stack.Screen
+          name="new-task"
+          options={{ presentation: "fullScreenModal", headerShown: false }}
+        />
+        <Stack.Screen name="settings" options={{ headerShown: false }} />
+      </Stack>
+      <StatusBar style={isDark ? "light" : "dark"} />
+    </ThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
     <Provider store={store}>
-      <ThemeProvider value={theme}>
-        <Stack
-          screenOptions={{
-            contentStyle: {
-              backgroundColor: theme.colors.background,
-            },
-          }}
-        >
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={modalOptions} />
-          <Stack.Screen
-            name="new-task"
-            options={{ presentation: "fullScreenModal", headerShown: false }}
-          />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
+      <ThemedLayout />
     </Provider>
   );
 }

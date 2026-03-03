@@ -1,5 +1,4 @@
-import { Colors } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppColors } from "@/hooks/use-app-colors";
 import { ChevronRight } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -40,8 +39,7 @@ const TABS: { key: TabType; label: string }[] = [
 ];
 
 export default function TaskDashboardSection() {
-  const scheme = useColorScheme() ?? "light";
-  const colors = Colors[scheme];
+ const {colors} = useAppColors();
 
   const [activeTab, setActiveTab] = useState<TabType>(TaskTab.UPCOMING);
 

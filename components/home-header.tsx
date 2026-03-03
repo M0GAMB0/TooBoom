@@ -1,7 +1,8 @@
 import { useAppColors } from "@/hooks/use-app-colors";
 import { getCurrentFormattedDate } from "@/src/utils/date";
 import { Ionicons } from "@expo/vector-icons";
-import { Text, View } from "react-native";
+import { useRouter } from "expo-router";
+import { Text, TouchableOpacity, View } from "react-native";
 
 interface HomeHeaderProps {
   title?: string;
@@ -13,6 +14,7 @@ export default function HomeHeader({
   streakDays = 12,
 }: HomeHeaderProps) {
   const { colors } = useAppColors();
+  const router = useRouter();
 
   const formattedDate = getCurrentFormattedDate();
 
@@ -56,7 +58,9 @@ export default function HomeHeader({
       </View>
 
       {/* Right side: settings */}
-      <View
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => router.push("/settings")}
         className="flex-row items-center rounded-full py-[8px] px-[8px]"
         style={{
           backgroundColor: colors.streakBadge,
@@ -65,7 +69,7 @@ export default function HomeHeader({
         }}
       >
         <Ionicons name="settings-sharp" size={24} color={colors.icon} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
