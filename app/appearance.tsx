@@ -15,15 +15,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AppearanceScreen() {
   const { colors, isDark } = useAppColors();
-  const { mode, setMode, accentColor, setAccent, fontFamily: currentFont, setFont } = useThemeMode();
+  const { accentColor, setAccent, fontFamily: currentFont, setFont } = useThemeMode();
   const router = useRouter();
 
-  const [tempMode, setTempMode] = useState(mode);
   const [tempAccent, setTempAccent] = useState(accentColor);
   const [tempFont, setTempFont] = useState(currentFont);
 
   const handleSave = () => {
-    setMode(tempMode);
     setAccent(tempAccent);
     setFont(tempFont);
     router.back();
@@ -36,8 +34,11 @@ export default function AppearanceScreen() {
     >
       <SettingsHeader title="Appearance" onBackPress={() => router.back()} />
 
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ justifyContent: "space-between", borderWidth: 1, borderColor: colors.borderColor, flex: 1 }} className="flex-1  px-4 py-4">
-
+      <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        contentContainerStyle={{ justifyContent: "space-between", flex: 1 }} 
+        className="flex-1 px-4 py-4"
+      >
         <View>
             {/* ACCENT COLOR */}
             <AppText
@@ -53,7 +54,9 @@ export default function AppearanceScreen() {
               {AccentColors.map((item) => (
                 <TouchableOpacity
                   key={item.id}
-                  onPress={() => setTempAccent(item.color)}
+                  onPress={() => {
+                    setTempAccent(item.color);
+                  }}
                   style={[
                     styles.colorCircle,
                     { backgroundColor: item.color },
@@ -80,7 +83,9 @@ export default function AppearanceScreen() {
               {FontStyles.map((font, index) => (
                 <TouchableOpacity
                   key={font.id}
-                  onPress={() => setTempFont(font.value)}
+                  onPress={() => {
+                    setTempFont(font.value);
+                  }}
                   className={`flex-row items-center justify-between p-5 ${
                     index !== FontStyles.length - 1 ? "border-b" : ""
                   }`}
