@@ -1,12 +1,13 @@
 import {
-  ProfileSection,
-  SettingItem,
-  SettingsCategory,
-  SettingsHeader,
-  SignOutButton,
+    ProfileSection,
+    SettingItem,
+    SettingsCategory,
+    SettingsHeader,
+    SignOutButton,
 } from "@/components/settings";
 import { AppText } from "@/components/ui/AppText";
 import { useAppColors } from "@/hooks/use-app-colors";
+import { useAuth } from "@/hooks/use-auth";
 import { useThemeMode } from "@/hooks/use-theme-mode";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -16,10 +17,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function SettingsScreen() {
   const { colors, isDark } = useAppColors();
   const { setMode } = useThemeMode();
+  const { user, logout } = useAuth();
   const router = useRouter();
 
   const [pushNotifications, setPushNotifications] = useState(true);
   const [appLock, setAppLock] = useState(false);
+
+  const handleSignOut = () => {
+    logout();
+    // Redirect is handled by AuthGuard in _layout
+  };
 
   return (
     <SafeAreaView
@@ -31,8 +38,8 @@ export default function SettingsScreen() {
       <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-4">
         {/* Profile Section */}
         <ProfileSection
-          name="Alex Thompson"
-          email="alex.t@productivity.app"
+          name={user?.email?.split("@")[0] || "User"}
+          email={user?.email || "user@app.com"}
           plan="PREMIUM PLAN"
           avatarUri="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1974&auto=format&fit=crop"
           onEditPress={() => {}}
@@ -97,7 +104,7 @@ export default function SettingsScreen() {
           />
         </SettingsCategory>
 
-        <SignOutButton onPress={() => {}} />
+        <SignOutButton onPress={handleSignOut} />
 
         {/* App Version */}
         <AppText
