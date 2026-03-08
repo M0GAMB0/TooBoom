@@ -8,6 +8,7 @@ import { navigateToNewTask } from "@/src/utils/navigation";
 import { ScrollView, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { AppText } from "../ui/AppText";
+import { SectionHeader } from "../ui/SectionHeader";
 
 export default function HomeScreen() {
   const { colors } = useAppColors();
@@ -24,12 +25,7 @@ export default function HomeScreen() {
             <StatsSection streakDays={12} completedTasks={7} totalTasks={8} />
 
             <View className="flex-row justify-between items-center mb-5 mt-4">
-              <AppText
-                className="text-[22px] font-bold"
-                style={{ color: colors.text }}
-              >
-                Daily Mission
-              </AppText>
+              <SectionHeader title="Daily Mission" />
 
               <AppText style={{ color: colors.primary }}>View all</AppText>
             </View>

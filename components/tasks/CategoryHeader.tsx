@@ -2,6 +2,7 @@ import { useAppColors } from "@/hooks/use-app-colors";
 import React from "react";
 import { View } from "react-native";
 import { AppText } from "../ui/AppText";
+import { SectionHeader } from "../ui/SectionHeader";
 
 interface CategoryHeaderProps {
   title: string;
@@ -13,25 +14,20 @@ export const CategoryHeader = ({ title, count, color }: CategoryHeaderProps) => 
   const { colors } = useAppColors();
 
   return (
-    <View className="flex-row items-center justify-between mt-6 mb-4 px-2">
+    <View className="flex-row items-center justify-between mt-8 mb-4 px-1">
       <View className="flex-row items-center">
         <View 
-          className="w-3 h-3 rounded-full mr-3"
+          className="w-3.5 h-3.5 rounded-full mr-4"
           style={{ backgroundColor: color }}
         />
-        <AppText 
-          className="text-2xl font-bold"
-          style={{ color: colors.text }}
-        >
-          {title}
-        </AppText>
+        <SectionHeader title={title} />
       </View>
       <View 
-        className="px-3 py-1 rounded-full"
-        style={{ backgroundColor: colors.borderColor }}
+        className="px-4 py-1.5 rounded-xl"
+        style={{ backgroundColor: "#1F182F" }}
       >
         <AppText 
-          className="text-sm font-bold"
+          className="text-base font-bold"
           style={{ color: colors.secondaryText }}
         >
           {count}

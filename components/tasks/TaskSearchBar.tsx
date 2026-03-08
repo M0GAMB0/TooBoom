@@ -14,16 +14,16 @@ export const TaskSearchBar = ({ value, onChangeText, placeholder = "Search tasks
 
   return (
     <View 
-      className="flex-row items-center px-4 py-3 rounded-2xl mb-6"
-      style={{ backgroundColor: colors.cardBackground, borderBottomWidth: 1, borderBottomColor: colors.borderColor }}
+      className="flex-row items-center px-5 py-4 rounded-[24px] mb-8"
+      style={{ backgroundColor: "#1F182F" }}
     >
-      <Ionicons name="search" size={20} color={colors.secondaryText} />
+      <Ionicons name="search" size={24} color={colors.secondaryText} />
       <TextInput
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={colors.secondaryText}
-        style={{ color: colors.text, flex: 1, marginLeft: 10, fontSize: 16, fontFamily }}
+        style={{ color: colors.text, flex: 1, marginLeft: 12, fontSize: 18, fontFamily }}
       />
     </View>
   );

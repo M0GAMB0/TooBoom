@@ -50,24 +50,27 @@ export const TaskCard = ({
 
   return (
     <View 
-      className="p-4 rounded-3xl mb-3 border-[1px]"
-      style={{ borderColor: colors.borderColor, backgroundColor: colors.cardBackground }}
+      className="p-5 rounded-2xl mb-4 border-[1px]"
+      style={{ 
+        borderColor: colors.borderColor, 
+        backgroundColor: colors.cardBackground,
+      }}
     >
-      <View className="flex-row items-center justify-between mb-2">
+      <View className="flex-row items-center justify-between mb-3">
         <View className="flex-row items-center flex-1">
           <TouchableOpacity 
             onPress={onToggleComplete}
             className="mr-3"
           >
             <View 
-              className="w-7 h-7 rounded-full border-2 items-center justify-center"
+              className="w-6 h-6 rounded-full border-2 items-center justify-center"
               style={isCompleted ? { backgroundColor: colors.primary, borderColor: colors.primary } : { borderColor: colors.secondaryText }}
             >
-              {isCompleted && <Ionicons name="checkmark" size={18} color={colors.white} />}
+              {isCompleted && <Ionicons name="checkmark" size={20} color={colors.white} />}
             </View>
           </TouchableOpacity>
           <AppText 
-            className={`text-lg font-semibold flex-1 ${isCompleted ? 'line-through opacity-50' : ''}`}
+            className={`text-base font-bold flex-1 ${isCompleted ? 'line-through opacity-50' : ''}`}
             style={{ color: colors.text }}
           >
             {title}
@@ -76,28 +79,28 @@ export const TaskCard = ({
         
         <TouchableOpacity onPress={onToggleStar}>
           {isStarred ? (
-            <Ionicons name="star" size={24} color={colors.energyLow} />
+            <Ionicons name="star" size={26} color={colors.energyLow} />
           ) : (
-             <Ionicons name="star-outline" size={24} color={colors.secondaryText} />
+             <Ionicons name="star-outline" size={26} color={colors.secondaryText} />
           )}
         </TouchableOpacity>
         
         {reminderIcon && !isStarred && (
-           <MaterialCommunityIcons name="alarm-snooze" size={24} color={colors.secondaryText} />
+           <MaterialCommunityIcons name="alarm-snooze" size={26} color={colors.secondaryText} />
         )}
       </View>
 
-      <View className="flex-row items-center mb-3">
+      <View className="flex-row items-center mb-4">
         {time && (
           <View className="flex-row items-center mr-4">
-            <Ionicons name="time-outline" size={16} color={colors.secondaryText} />
-            <AppText className="ml-1 text-sm" style={{ color: colors.secondaryText }}>{time}</AppText>
+            <Ionicons name="time" size={18} color={colors.secondaryText} />
+            <AppText className="ml-2 text-base font-medium" style={{ color: colors.secondaryText }}>{time}</AppText>
           </View>
         )}
         {location && (
           <View className="flex-row items-center">
-            <Ionicons name="location-outline" size={16} color={colors.secondaryText} />
-            <AppText className="ml-1 text-sm" style={{ color: colors.secondaryText }}>{location}</AppText>
+            <Ionicons name="location" size={18} color={colors.secondaryText} />
+            <AppText className="ml-2 text-base font-medium" style={{ color: colors.secondaryText }}>{location}</AppText>
           </View>
         )}
       </View>
@@ -105,31 +108,31 @@ export const TaskCard = ({
       <View className="flex-row flex-wrap gap-2">
         {priority && (
           <View 
-            className="px-3 py-1 rounded-lg"
+            className="px-4 py-2 rounded-xl"
             style={{ backgroundColor: priorityStyle?.bg }}
           >
-            <AppText className="text-xs font-bold" style={{ color: priorityStyle?.text }}>
+            <AppText className="text-sm font-bold" style={{ color: priorityStyle?.text }}>
               {priority === "high" ? "High Priority" : priority === "med" ? "Med Priority" : "Low Priority"}
             </AppText>
           </View>
         )}
         {energy && (
           <View 
-            className="px-3 py-1 rounded-lg flex-row items-center"
+            className="px-4 py-2 rounded-xl flex-row items-center"
             style={{ backgroundColor: energy === "high" ? colors.energyHighBg : colors.energyLowBg }}
           >
-             <AppText className="mr-1">{energy === "high" ? "🧠" : "⚡️"}</AppText>
-            <AppText className="text-xs font-bold" style={{ color: energy === "high" ? colors.energyHigh : colors.energyLow }}>
+             <AppText className="mr-2 text-base">{energy === "high" ? "🧠" : "⚡️"}</AppText>
+            <AppText className="text-sm font-bold" style={{ color: energy === "high" ? colors.energyHigh : colors.energyLow }}>
               {energy === "high" ? "High Energy" : "Low Energy"}
             </AppText>
           </View>
         )}
         {difficulty && (
           <View 
-            className="px-3 py-1 rounded-lg flex-row items-center"
+            className="px-4 py-2 rounded-xl flex-row items-center"
             style={{ backgroundColor: difficulty === "hard" ? colors.difficultyHardBg : colors.difficultyMedBg }}
           >
-            <AppText className="text-xs font-bold" style={{ color: difficulty === "hard" ? colors.difficultyHard : colors.difficultyMed }}>
+            <AppText className="text-sm font-bold" style={{ color: difficulty === "hard" ? "white" : colors.difficultyMed }}>
               {difficulty === "hard" ? "Hard" : "Med Difficulty"}
             </AppText>
           </View>
