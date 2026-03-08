@@ -106,6 +106,7 @@ export default function SettingsScreen() {
           />
           <SettingItem
             icon="storage"
+            iconType="material"
             title="Import Data"
             onPress={() => {}}
           />

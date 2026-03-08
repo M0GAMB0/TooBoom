@@ -1,7 +1,7 @@
 import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
+    DarkTheme,
+    DefaultTheme,
+    ThemeProvider,
 } from "@react-navigation/native";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -15,6 +15,10 @@ import { useAuth } from "@/hooks/use-auth";
 import { store } from "@/src/redux/store";
 import { Inter_400Regular, Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
 import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
+import { Montserrat_400Regular, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
+import { OpenSans_400Regular, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
+import { Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import { Raleway_400Regular, Raleway_700Bold } from "@expo-google-fonts/raleway";
 import { RobotoMono_400Regular, RobotoMono_700Bold } from "@expo-google-fonts/roboto-mono";
 import * as SplashScreen from 'expo-splash-screen';
 import * as SystemUI from "expo-system-ui";
@@ -68,6 +72,14 @@ function ThemedLayout() {
     Merriweather_700Bold,
     RobotoMono_400Regular,
     RobotoMono_700Bold,
+    OpenSans_400Regular,
+    OpenSans_700Bold,
+    Montserrat_400Regular,
+    Montserrat_700Bold,
+    Poppins_400Regular,
+    Poppins_700Bold,
+    Raleway_400Regular,
+    Raleway_700Bold,
   });
 
   useEffect(() => {

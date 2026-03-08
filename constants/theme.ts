@@ -166,4 +166,8 @@ export const FontStyles = [
   { id: "inter", displayName: "Inter (System Default)", name: "Inter", value: "Inter_400Regular" },
   { id: "merriweather", displayName: "Merriweather", name: "Merriweather", value: "Merriweather_400Regular" },
   { id: "roboto", displayName: "Roboto Mono", name: "Roboto Mono", value: "RobotoMono_400Regular" },
+  { id: "opensans", displayName: "Open Sans", name: "Open Sans", value: "OpenSans_400Regular" },
+  { id: "montserrat", displayName: "Montserrat", name: "Montserrat", value: "Montserrat_400Regular" },
+  { id: "poppins", displayName: "Poppins", name: "Poppins", value: "Poppins_400Regular" },
+  { id: "raleway", displayName: "Raleway", name: "Raleway", value: "Raleway_400Regular" },
 ];
