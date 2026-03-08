@@ -102,10 +102,7 @@ export default function TasksScreen() {
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 py-4">
         <View>
-          <AppText className="text-xl" style={{ color: colors.secondaryText }}>
-            Good Morning,
-          </AppText>
-          <AppText className="text-4xl font-extrabold" style={{ color: colors.text }}>
+          <AppText className="text-2xl font-extrabold" style={{ color: colors.text }}>
             My Tasks
           </AppText>
         </View>
@@ -184,14 +181,7 @@ export default function TasksScreen() {
       >
         <Ionicons name="add" size={48} color="white" />
       </TouchableOpacity> */}
-      <FAB onPress={navigateToNewTask} style={{ 
-          backgroundColor: colors.primary,
-          shadowColor: colors.primary,
-          shadowOffset: { width: 0, height: 10 },
-          shadowOpacity: 0.5,
-          shadowRadius: 15,
-          elevation: 10
-        }} />
+      <FAB onPress={navigateToNewTask} />
     </SafeAreaView>
   );
 }
