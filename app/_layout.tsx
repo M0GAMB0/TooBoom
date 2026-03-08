@@ -1,33 +1,156 @@
 import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
+    DarkTheme,
+    DefaultTheme,
+    ThemeProvider,
 } from "@react-navigation/native";
-import { Stack } from "expo-router";
+import { Stack, useRouter, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import { Provider } from "react-redux";
+import "../global.css";
 
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { Colors } from "@/constants/theme";
+import { useAppColors } from "@/hooks/use-app-colors";
+import { useAuth } from "@/hooks/use-auth";
 import { store } from "@/src/redux/store";
+import { Inter_400Regular, Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
+import { Merriweather_400Regular, Merriweather_700Bold } from "@expo-google-fonts/merriweather";
+import { Montserrat_400Regular, Montserrat_700Bold } from "@expo-google-fonts/montserrat";
+import { OpenSans_400Regular, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
+import { Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import { Raleway_400Regular, Raleway_700Bold } from "@expo-google-fonts/raleway";
+import { RobotoMono_400Regular, RobotoMono_700Bold } from "@expo-google-fonts/roboto-mono";
+import * as SplashScreen from 'expo-splash-screen';
+import * as SystemUI from "expo-system-ui";
+import { useEffect } from "react";
+import { ActivityIndicator, View } from "react-native";
+import Toast from "react-native-toast-message";
+
+SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
   anchor: "(tabs)",
 };
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const modalOptions = { presentation: "modal", title: "Modal" } as const;
+function AuthGuard({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated, isLoading } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    const inAuthGroup = segments[0] === "(auth)";
+
+    if (!isAuthenticated && !inAuthGroup) {
+      // Redirect to the login page if they are not authenticated.
+      router.replace("/(auth)/login");
+    } else if (isAuthenticated && inAuthGroup) {
+      // Redirect away from the login page if they are authenticated.
+      router.replace("/(tabs)/(home)");
+    }
+  }, [isAuthenticated, segments, isLoading]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#F9F5FF" }}>
+        <ActivityIndicator size="large" color="#5B13EC" />
+      </View>
+    );
+  }
+
+  return <>{children}</>;
+}
+
+function ThemedLayout() {
+  const { colors, isDark, fontFamily } = useAppColors();
+  
+  const [loaded, error] = useFonts({
+    Inter_400Regular,
+    Inter_700Bold,
+    Merriweather_400Regular,
+    Merriweather_700Bold,
+    RobotoMono_400Regular,
+    RobotoMono_700Bold,
+    OpenSans_400Regular,
+    OpenSans_700Bold,
+    Montserrat_400Regular,
+    Montserrat_700Bold,
+    Poppins_400Regular,
+    Poppins_700Bold,
+    Raleway_400Regular,
+    Raleway_700Bold,
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  useEffect(() => {
+    SystemUI.setBackgroundColorAsync(colors.background);
+  }, [colors.background]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
+  const CustomDarkTheme = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      background: Colors.dark.background,
+      card: Colors.dark.background,
+    },
+  };
+
+  const CustomDefaultTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: Colors.light.background,
+      card: Colors.light.background,
+    },
+  };
+
+  const theme = isDark ? CustomDarkTheme : CustomDefaultTheme;
 
   return (
-    <Provider store={store}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
+    <ThemeProvider value={theme}>
+      <AuthGuard>
+        <Stack
+          screenOptions={{
+            contentStyle: {
+              backgroundColor: theme.colors.background,
+            },
+            headerTitleStyle: {
+              fontFamily: fontFamily,
+            }
+          }}
+        >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={modalOptions} />
+          <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)/signup" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: "modal", title: "Modal" }} />
+          <Stack.Screen
+            name="new-task"
+            options={{ presentation: "fullScreenModal", headerShown: false }}
+          />
+          <Stack.Screen name="settings" options={{ headerShown: false }} />
+          <Stack.Screen name="appearance" options={{ headerShown: false }} />
         </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
+      </AuthGuard>
+      <StatusBar style={isDark ? "light" : "dark"} />
+      <Toast />
+    </ThemeProvider>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <Provider store={store}>
+      <ThemedLayout />
     </Provider>
   );
 }

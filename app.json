@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "PlanBoom",
-    "slug": "PlanBoom",
+    "name": "TooBoom",
+    "slug": "TooBoom",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "planboom",
+    "scheme": "tooboom",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
