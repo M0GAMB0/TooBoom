@@ -40,7 +40,7 @@ export default function TasksScreen() {
 
   const filters = ["Today", "Upcoming", "Pending", "Completed"];
 
-  // Mock data for the UI demonstration
+  // Enhanced mock data for filtering
   const taskCategories: Category[] = [
     {
       id: "work",
@@ -55,6 +55,7 @@ export default function TasksScreen() {
           energy: "high",
           difficulty: "hard",
           isStarred: true,
+          isCompleted: false, // New property
         },
         {
           id: "2",
@@ -63,6 +64,7 @@ export default function TasksScreen() {
           priority: "med",
           energy: "low",
           reminderIcon: true,
+          isCompleted: true, // Mocked as completed
         },
       ],
     },
@@ -78,6 +80,7 @@ export default function TasksScreen() {
           priority: "med",
           difficulty: "med",
           isStarred: true,
+          isCompleted: false,
         },
       ],
     },
@@ -92,10 +95,23 @@ export default function TasksScreen() {
           time: "6:00 PM",
           priority: "low",
           energy: "high",
+          isCompleted: false,
         },
       ],
     },
   ];
+
+  // Logic to filter tasks based on active tab
+  const filteredCategories = taskCategories.map(category => ({
+    ...category,
+    tasks: category.tasks.filter(task => {
+      if (activeFilter === "Completed") return task.isCompleted;
+      if (activeFilter === "Pending") return !task.isCompleted;
+      if (activeFilter === "Today") return !task.isCompleted; // Mocking today as pending tasks
+      if (activeFilter === "Upcoming") return !task.isCompleted; // Mocking upcoming
+      return true;
+    })
+  })).filter(category => category.tasks.length > 0);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
@@ -139,28 +155,34 @@ export default function TasksScreen() {
         </ScrollView>
 
         {/* Task Lists */}
-        {taskCategories.map((category) => (
-          <View key={category.id} className="mb-6">
-            <CategoryHeader 
-              title={category.title} 
-              count={category.tasks.length} 
-              color={category.color} 
-            />
-            {category.tasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                title={task.title}
-                time={task.time}
-                location={task.location}
-                priority={task.priority}
-                energy={task.energy}
-                difficulty={task.difficulty}
-                isStarred={task.id === "1" || task.id === "3"} // Matching mockup stars
-                reminderIcon={task.reminderIcon}
+        {filteredCategories.length > 0 ? (
+          filteredCategories.map((category) => (
+            <View key={category.id} className="mb-6">
+              <CategoryHeader 
+                title={category.title} 
+                count={category.tasks.length} 
+                color={category.color} 
               />
-            ))}
+              {category.tasks.map((task) => (
+                <TaskCard
+                  key={task.id}
+                  title={task.title}
+                  time={task.time}
+                  location={task.location}
+                  priority={task.priority}
+                  energy={task.energy}
+                  difficulty={task.difficulty}
+                  isStarred={task.isStarred}
+                  reminderIcon={task.reminderIcon}
+                />
+              ))}
+            </View>
+          ))
+        ) : (
+          <View className="items-center justify-center py-20">
+            <AppText style={{ color: colors.secondaryText }}>No tasks found for "{activeFilter}"</AppText>
           </View>
-        ))}
+        )}
         
         {/* Extra padding for FAB */}
         <View style={{ height: 100 }} />
