@@ -42,7 +42,7 @@ export default function FontStylePicker({
             <AppText
               style={{ color: colors.text, fontFamily: font.value, fontSize: 16 }}
             >
-              {font.name}
+              {font.displayName}
             </AppText>
             <View
               style={[

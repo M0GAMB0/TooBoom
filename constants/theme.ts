@@ -163,7 +163,7 @@ export const AccentColors = [
 ];
 
 export const FontStyles = [
-  { id: "inter", name: "Inter (System Default)", value: "Inter_400Regular" },
-  { id: "merriweather", name: "Merriweather", value: "Merriweather_400Regular" },
-  { id: "roboto", name: "Roboto Mono", value: "RobotoMono_400Regular" },
+  { id: "inter", displayName: "Inter (System Default)", name: "Inter", value: "Inter_400Regular" },
+  { id: "merriweather", displayName: "Merriweather", name: "Merriweather", value: "Merriweather_400Regular" },
+  { id: "roboto", displayName: "Roboto Mono", name: "Roboto Mono", value: "RobotoMono_400Regular" },
 ];

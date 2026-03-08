@@ -5,19 +5,19 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    ActivityIndicator,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 export default function LoginScreen() {
-  const { colors } = useAppColors();
+  const { colors, isDark, fontFamily } = useAppColors();
   const { login } = useAuth();
   const router = useRouter();
 
@@ -55,7 +55,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-[#FDFBFF]" edges={["top"]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }} edges={["top"]}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
@@ -65,18 +65,29 @@ export default function LoginScreen() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          <View className="px-6 pt-10 bg-[#FDFBFF]">
+          <View className="px-6 pt-10" style={{ backgroundColor: colors.background }}>
             {/* LOGO AREA */}
             <View className="items-center mb-8">
-              <View className="w-16 h-16 rounded-2xl bg-[#F0E7FF] justify-center items-center">
-                <Ionicons name="checkmark-done" size={32} color="#5B13EC" />
+              <View 
+                className="w-16 h-16 rounded-2xl justify-center items-center" 
+                style={{ backgroundColor: colors.primary + '1A' }}
+              >
+                <Ionicons name="checkmark-done" size={32} color={colors.primary} />
               </View>
             </View>
 
             {/* WELCOME HEADER */}
             <View className="items-center mb-10">
-              <AppText className="text-3xl font-bold text-[#1E1B4B] mb-2">Welcome back</AppText>
-              <AppText className="text-base text-[#64748B]">
+              <AppText 
+                className="text-3xl font-bold mb-2" 
+                style={{ color: colors.text, fontFamily }}
+              >
+                Welcome back
+              </AppText>
+              <AppText 
+                className="text-base" 
+                style={{ color: colors.secondaryText, fontFamily }}
+              >
                 Please enter your details to sign in
               </AppText>
             </View>
@@ -87,8 +98,14 @@ export default function LoginScreen() {
               <View className="mb-5">
                 <TextInput
                   placeholder="Email address"
-                  placeholderTextColor="#94A3B8"
-                  className="bg-white border border-[#E2E8F0] rounded-xl px-4 py-3.5 text-base text-[#1E1B4B]"
+                  placeholderTextColor={colors.secondaryText}
+                  className="border rounded-xl px-4 py-3.5 text-base"
+                  style={{ 
+                    backgroundColor: colors.cardBackground, 
+                    borderColor: colors.borderColor,
+                    color: colors.text,
+                    fontFamily
+                  }}
                   value={email}
                   onChangeText={setEmail}
                   autoCapitalize="none"
@@ -98,12 +115,19 @@ export default function LoginScreen() {
 
               {/* PASSWORD */}
               <View className="mb-5">
-                <View className="bg-white border border-[#E2E8F0] rounded-xl flex-row items-center">
+                <View 
+                  className="border rounded-xl flex-row items-center"
+                  style={{ 
+                    backgroundColor: colors.cardBackground, 
+                    borderColor: colors.borderColor 
+                  }}
+                >
                   <TextInput
                     placeholder="Password"
-                    placeholderTextColor="#94A3B8"
+                    placeholderTextColor={colors.secondaryText}
                     secureTextEntry={!showPassword}
-                    className="flex-1 px-4 py-3.5 text-base text-[#1E1B4B]"
+                    className="flex-1 px-4 py-3.5 text-base"
+                    style={{ color: colors.text, fontFamily }}
                     value={password}
                     onChangeText={setPassword}
                   />
@@ -114,7 +138,7 @@ export default function LoginScreen() {
                     <Ionicons
                       name={showPassword ? "eye-off" : "eye"}
                       size={20}
-                      color="#94A3B8"
+                      color={colors.secondaryText}
                     />
                   </TouchableOpacity>
                 </View>
@@ -127,61 +151,109 @@ export default function LoginScreen() {
                   onPress={() => setRememberMe(!rememberMe)}
                 >
                   <View
-                    className={`w-5 h-5 rounded-md border border-[#E2E8F0] mr-2 justify-center items-center ${
-                      rememberMe ? "bg-[#5B13EC] border-[#5B13EC]" : ""
-                    }`}
+                    className="w-5 h-5 rounded-md border mr-2 justify-center items-center"
+                    style={{ 
+                      borderColor: colors.borderColor,
+                      backgroundColor: rememberMe ? colors.primary : colors.cardBackground
+                    }}
                   >
                     {rememberMe && (
-                      <Ionicons name="checkmark" size={14} color="#FFF" />
+                      <Ionicons name="checkmark" size={14} color={colors.white} />
                     )}
                   </View>
-                  <AppText className="text-sm text-[#64748B]">Remember me</AppText>
+                  <AppText 
+                    className="text-sm" 
+                    style={{ color: colors.secondaryText, fontFamily }}
+                  >
+                    Remember me
+                  </AppText>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                  <AppText className="text-sm text-[#5B13EC] font-bold">Forgot password?</AppText>
+                  <AppText 
+                    className="text-sm font-bold" 
+                    style={{ color: colors.primary, fontFamily }}
+                  >
+                    Forgot password?
+                  </AppText>
                 </TouchableOpacity>
               </View>
 
               {/* LOGIN BUTTON */}
               <TouchableOpacity
-                className="bg-[#5B13EC] rounded-xl py-4 items-center shadow-lg shadow-[#5B13EC]/20"
+                className="rounded-xl py-4 items-center shadow-lg"
+                style={{ 
+                  backgroundColor: colors.primary,
+                  shadowColor: colors.primary,
+                }}
                 onPress={handleLogin}
                 disabled={loading}
               >
                 {loading ? (
-                  <ActivityIndicator color="#FFF" />
+                  <ActivityIndicator color={colors.white} />
                 ) : (
-                  <AppText className="text-white text-lg font-bold">Login</AppText>
+                  <AppText 
+                    className="text-lg font-bold" 
+                    style={{ color: colors.white, fontFamily }}
+                  >
+                    Login
+                  </AppText>
                 )}
               </TouchableOpacity>
 
               {/* DIVIDER */}
               <View className="flex-row items-center my-8">
-                <View className="flex-1 h-px bg-[#E2E8F0]" />
-                <AppText className="text-sm text-[#94A3B8] mx-3">Or continue with</AppText>
-                <View className="flex-1 h-px bg-[#E2E8F0]" />
+                <View className="flex-1 h-px" style={{ backgroundColor: colors.borderColor }} />
+                <AppText 
+                  className="text-sm mx-3" 
+                  style={{ color: colors.secondaryText, fontFamily }}
+                >
+                  Or continue with
+                </AppText>
+                <View className="flex-1 h-px" style={{ backgroundColor: colors.borderColor }} />
               </View>
 
               {/* SOCIAL LOGIN */}
               <View className="flex-row justify-between gap-4 mb-8">
-                <TouchableOpacity className="flex-1 flex-row items-center justify-center border border-[#E2E8F0] rounded-xl py-3 bg-white">
+                <TouchableOpacity 
+                  className="flex-1 flex-row items-center justify-center border rounded-xl py-3"
+                  style={{ backgroundColor: colors.cardBackground, borderColor: colors.borderColor }}
+                >
                   <Ionicons name="logo-google" size={20} color="#EA4335" />
-                  <AppText className="ml-2 text-sm font-semibold text-[#1E1B4B]">Google</AppText>
+                  <AppText 
+                    className="ml-2 text-sm font-semibold" 
+                    style={{ color: colors.text, fontFamily }}
+                  >
+                    Google
+                  </AppText>
                 </TouchableOpacity>
 
-                <TouchableOpacity className="flex-1 flex-row items-center justify-center border border-[#E2E8F0] rounded-xl py-3 bg-white">
-                  <Ionicons name="logo-apple" size={20} color="#000" />
-                  <AppText className="ml-2 text-sm font-semibold text-[#1E1B4B]">Apple</AppText>
+                <TouchableOpacity 
+                  className="flex-1 flex-row items-center justify-center border rounded-xl py-3"
+                  style={{ backgroundColor: colors.cardBackground, borderColor: colors.borderColor }}
+                >
+                  <Ionicons name="logo-apple" size={20} color={isDark ? colors.white : "#000"} />
+                  <AppText 
+                    className="ml-2 text-sm font-semibold" 
+                    style={{ color: colors.text, fontFamily }}
+                  >
+                    Apple
+                  </AppText>
                 </TouchableOpacity>
               </View>
 
               {/* SIGN UP LINK */}
-              <View className="items-center mb-10">
-                <AppText className="text-sm text-[#64748B]">
+              <View className="flex-row justfy-center w-full items-center mb-10 border border-2 border-[#fff]">
+                <AppText 
+                  className="text-sm" 
+                  style={{ color: colors.secondaryText, fontFamily }}
+                >
                   Don't have an account?{" "}
-                  <AppText className="text-[#5B13EC] font-bold">Sign up</AppText>
+                  
                 </AppText>
+                <TouchableOpacity className="" onPress={() => router.push("/(auth)/signup")}>
+                    <AppText className="font-bold" style={{ color: colors.primary }}>Sign up</AppText>
+                  </TouchableOpacity>
               </View>
             </View>
           </View>

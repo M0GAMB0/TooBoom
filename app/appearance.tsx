@@ -1,7 +1,6 @@
 import {
-  AccentColorPicker,
   FontStylePicker,
-  SettingsHeader,
+  SettingsHeader
 } from "@/components/settings";
 import { AppText } from "@/components/ui/AppText";
 import { useAppColors } from "@/hooks/use-app-colors";
@@ -35,7 +34,7 @@ export default function AppearanceScreen() {
       style={{ flex: 1, backgroundColor: colors.background }}
       edges={["top"]}
     >
-      <SettingsHeader title="Appearance" onBackPress={() => router.back()} />
+      <SettingsHeader title="Font Style" onBackPress={() => router.back()} />
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -43,11 +42,11 @@ export default function AppearanceScreen() {
         className="flex-1 px-4 py-4"
       >
         <View>
-          <AccentColorPicker
+          {/* <AccentColorPicker
             colors={colors}
             selectedColor={tempAccent}
             onSelect={setTempAccent}
-          />
+          /> */}
           <FontStylePicker
             colors={colors}
             selectedFont={tempFont}

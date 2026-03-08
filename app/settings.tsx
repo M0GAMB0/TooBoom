@@ -1,11 +1,12 @@
 import {
-    ProfileSection,
-    SettingItem,
-    SettingsCategory,
-    SettingsHeader,
-    SignOutButton,
+  ProfileSection,
+  SettingItem,
+  SettingsCategory,
+  SettingsHeader,
+  SignOutButton,
 } from "@/components/settings";
 import { AppText } from "@/components/ui/AppText";
+import { FontStyles } from "@/constants/theme";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { useAuth } from "@/hooks/use-auth";
 import { useThemeMode } from "@/hooks/use-theme-mode";
@@ -16,12 +17,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
   const { colors, isDark } = useAppColors();
-  const { setMode } = useThemeMode();
+  const { setMode,  fontFamily: currentFont, } = useThemeMode();
   const { user, logout } = useAuth();
   const router = useRouter();
 
   const [pushNotifications, setPushNotifications] = useState(true);
   const [appLock, setAppLock] = useState(false);
+
+  const currentFontName =
+    FontStyles.find((f) => f.value === currentFont)?.name || currentFont;
+
 
   const handleSignOut = () => {
     logout();
@@ -56,9 +61,11 @@ export default function SettingsScreen() {
           />
           <SettingItem
             icon="color-palette-outline"
-            title="Appearance"
+            title="Font Style"
+            value={currentFontName}
             onPress={() => router.push("/appearance")}
           />
+          
         </SettingsCategory>
 
         <SettingsCategory title="Notifications">
