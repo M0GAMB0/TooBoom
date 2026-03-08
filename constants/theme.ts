@@ -85,6 +85,7 @@ export const Colors = {
     shadowLight: "#fdfdfd",
     gradientStart: "#7C3AED",
     gradientEnd: "#5B13EC",
+    mutedBackground: "#F1F5F9",
   },
   dark: {
     text: "#ECEDEE",
@@ -125,6 +126,7 @@ export const Colors = {
     shadowLight: "#2A1E40",
     gradientStart: "#7C3AED",
     gradientEnd: "#5B13EC",
+    mutedBackground: "#1E293BCC",
   },
 };
 

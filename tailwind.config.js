@@ -23,11 +23,11 @@ module.exports = {
           default: "#A492C9",
           cardBackground: "#fff",
           white: "#fff",
-          tabInactive: "#94A3B8",
+          tabInactive: "#64748B",
           borderColor: "#5B13EC0D",
           streak: "#F97316",
           streakBadge: "#FAF5FF",
-          secondaryText: "#94A3B8",
+          secondaryText: "#64748B",
         },
         // Dark mode colors
         dark: {
@@ -44,7 +44,7 @@ module.exports = {
           borderColor: "#2F2348",
           streak: "#F97316",
           streakBadge: "#1F182F",
-          secondaryText: "#94A3B8",
+          secondaryText: "#64748B",
         },
       },
     },
