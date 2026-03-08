@@ -5,16 +5,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    ActivityIndicator,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Toast from "react-native-toast-message";
 
 export default function SignupScreen() {
   const { colors, isDark, fontFamily } = useAppColors();
@@ -29,6 +28,18 @@ export default function SignupScreen() {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Validation helpers
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const isFormValid = 
+    fullName.trim().length > 0 &&
+    isValidEmail(email) &&
+    password.length >= 8 &&
+    password === confirmPassword &&
+    agreeToTerms;
+
   // Simple password strength logic
   const getPasswordStrength = () => {
     if (password.length === 0) return 0;
@@ -41,32 +52,7 @@ export default function SignupScreen() {
   const strengthLabels = ["", "Weak", "Medium", "Strong"];
 
   const handleSignup = async () => {
-    if (!fullName || !email || !password || !confirmPassword) {
-      Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: "Please fill in all fields.",
-      });
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: "Passwords do not match.",
-      });
-      return;
-    }
-
-    if (!agreeToTerms) {
-      Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: "Please agree to the Terms of Service.",
-      });
-      return;
-    }
+    if (!isFormValid) return;
 
     setLoading(true);
     // Simulate API call
@@ -244,9 +230,13 @@ export default function SignupScreen() {
               {/* SIGNUP BUTTON */}
               <TouchableOpacity
                 className="rounded-xl py-4 items-center shadow-lg"
-                style={{ backgroundColor: colors.primary, shadowColor: colors.primary }}
+                style={{ 
+                  backgroundColor: colors.primary, 
+                  shadowColor: colors.primary,
+                  opacity: isFormValid ? 1 : 0.5
+                }}
                 onPress={handleSignup}
-                disabled={loading}
+                disabled={!isFormValid || loading}
               >
                 {loading ? (
                   <ActivityIndicator color={colors.white} />
