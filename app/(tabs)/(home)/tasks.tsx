@@ -5,7 +5,7 @@ import { TaskSearchBar } from "@/components/tasks/TaskSearchBar";
 import { AppText } from "@/components/ui/AppText";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ScrollView, StatusBar, TouchableOpacity, View } from "react-native";
 import { SafeAreaView as SafeAreaViewContext } from "react-native-safe-area-context";
 
@@ -86,6 +86,19 @@ export default function MyTasksScreen() {
   const [activeFilter, setActiveFilter] = useState("Today");
 
   const filters = ["Today", "Upcoming", "Pending", "Completed"];
+  
+  const filteredTasks = useMemo(() => {
+    const result: Record<string, TaskItem[]> = {};
+    Object.keys(MOCK_TASKS).forEach((category) => {
+      result[category] = MOCK_TASKS[category].filter((task) => {
+        if (activeFilter === "Completed") return task.isCompleted;
+        if (activeFilter === "Pending") return !task.isCompleted;
+        // For "Today" and "Upcoming", show non-completed tasks
+        return !task.isCompleted;
+      });
+    });
+    return result;
+  }, [activeFilter]);
 
   return (
     <SafeAreaViewContext style={{ flex: 1, backgroundColor: colors.background }}>
@@ -126,31 +139,25 @@ export default function MyTasksScreen() {
 
         {/* Task List */}
         <ScrollView showsVerticalScrollIndicator={false} className="flex-1">
-          <CategoryHeader 
-            title="Work" 
-            count={MOCK_TASKS.Work.length} 
-            color={colors.categoryWork} 
-          />
-          {MOCK_TASKS.Work.map(task => (
-            <TaskCard key={task.id} {...task} />
-          ))}
-
-          <CategoryHeader 
-            title="Personal" 
-            count={MOCK_TASKS.Personal.length} 
-            color={colors.categoryPersonal} 
-          />
-          {MOCK_TASKS.Personal.map(task => (
-            <TaskCard key={task.id} {...task} />
-          ))}
-
-          <CategoryHeader 
-            title="Health" 
-            count={MOCK_TASKS.Health.filter(t => !t.isCompleted).length} 
-            color={colors.categoryHealth} 
-          />
-          {MOCK_TASKS.Health.filter(t => !t.isCompleted).map(task => (
-            <TaskCard key={task.id} {...task} />
+          {Object.entries(filteredTasks).map(([category, tasks]) => (
+            <React.Fragment key={category}>
+              {tasks.length > 0 && (
+                <>
+                  <CategoryHeader 
+                    title={category} 
+                    count={tasks.length} 
+                    color={
+                      category === "Work" ? colors.categoryWork : 
+                      category === "Personal" ? colors.categoryPersonal : 
+                      colors.categoryHealth
+                    } 
+                  />
+                  {tasks.map(task => (
+                    <TaskCard key={task.id} {...task} />
+                  ))}
+                </>
+              )}
+            </React.Fragment>
           ))}
           
           <View className="h-20" />
@@ -158,7 +165,7 @@ export default function MyTasksScreen() {
       </View>
 
       {/* Floating Action Button */}
-      <TouchableOpacity 
+      {/* <TouchableOpacity 
         className="absolute bottom-10 right-8 w-16 h-16 rounded-full items-center justify-center shadow-lg"
         style={{ 
           backgroundColor: colors.primary,
@@ -170,7 +177,7 @@ export default function MyTasksScreen() {
         }}
       >
         <Ionicons name="add" size={36} color={colors.white} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaViewContext>
   );
 }

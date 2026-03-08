@@ -3,7 +3,9 @@ import { FilterChip } from "@/components/tasks/FilterChip";
 import { TaskCard } from "@/components/tasks/TaskCard";
 import { TaskSearchBar } from "@/components/tasks/TaskSearchBar";
 import { AppText } from "@/components/ui/AppText";
+import { FAB } from "@/components/ui/FAB";
 import { useAppColors } from "@/hooks/use-app-colors";
+import { navigateToNewTask } from "@/src/utils/navigation";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -168,7 +170,7 @@ export default function TasksScreen() {
       </ScrollView>
 
       {/* Floating Action Button */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         className="absolute bottom-10 right-8 w-20 h-20 rounded-full items-center justify-center shadow-2xl"
         style={{ 
           backgroundColor: colors.primary,
@@ -181,7 +183,15 @@ export default function TasksScreen() {
         onPress={() => router.push("/new-task")}
       >
         <Ionicons name="add" size={48} color="white" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <FAB onPress={navigateToNewTask} style={{ 
+          backgroundColor: colors.primary,
+          shadowColor: colors.primary,
+          shadowOffset: { width: 0, height: 10 },
+          shadowOpacity: 0.5,
+          shadowRadius: 15,
+          elevation: 10
+        }} />
     </SafeAreaView>
   );
 }
