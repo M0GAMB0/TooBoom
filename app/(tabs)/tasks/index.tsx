@@ -21,7 +21,8 @@ interface Task {
   energy?: "high" | "low";
   difficulty?: "hard" | "med";
   isStarred?: boolean;
-  isCompleted?: boolean;
+  status: "todo" | "in-progress" | "completed"; // Updated
+  dueDate: Date; // Added
   reminderIcon?: boolean;
 }
 
@@ -36,11 +37,21 @@ export default function TasksScreen() {
   const { colors } = useAppColors();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("Today");
+  
+  // States for dual filtering
+  const [activeFilter, setActiveFilter] = useState("To-Do"); // Main Status Filter
+  const [activeTimeFilter, setActiveTimeFilter] = useState("All"); // Secondary Time Filter
 
-  const filters = ["Today", "Upcoming", "Pending", "Completed"];
+  const statusFilters = ["To-Do", "In Progress", "Completed"];
+  const timeFilters = ["All", "Today", "Upcoming", "Overdue"];
 
-  // Enhanced mock data for filtering
+  // Enhanced mock data with statuses and dates
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
   const taskCategories: Category[] = [
     {
       id: "work",
@@ -55,7 +66,8 @@ export default function TasksScreen() {
           energy: "high",
           difficulty: "hard",
           isStarred: true,
-          isCompleted: false, // New property
+          status: "in-progress",
+          dueDate: today,
         },
         {
           id: "2",
@@ -64,7 +76,15 @@ export default function TasksScreen() {
           priority: "med",
           energy: "low",
           reminderIcon: true,
-          isCompleted: true, // Mocked as completed
+          status: "todo",
+          dueDate: tomorrow,
+        },
+        {
+          id: "5",
+          title: "Client Email Followup",
+          priority: "low",
+          status: "todo",
+          dueDate: yesterday, // Overdue
         },
       ],
     },
@@ -80,7 +100,8 @@ export default function TasksScreen() {
           priority: "med",
           difficulty: "med",
           isStarred: true,
-          isCompleted: false,
+          status: "todo",
+          dueDate: today,
         },
       ],
     },
@@ -95,21 +116,35 @@ export default function TasksScreen() {
           time: "6:00 PM",
           priority: "low",
           energy: "high",
-          isCompleted: false,
+          status: "completed",
+          dueDate: yesterday,
         },
       ],
     },
   ];
 
-  // Logic to filter tasks based on active tab
+  // Logic to filter tasks based on BOTH active filters
   const filteredCategories = taskCategories.map(category => ({
     ...category,
     tasks: category.tasks.filter(task => {
-      if (activeFilter === "Completed") return task.isCompleted;
-      if (activeFilter === "Pending") return !task.isCompleted;
-      if (activeFilter === "Today") return !task.isCompleted; // Mocking today as pending tasks
-      if (activeFilter === "Upcoming") return !task.isCompleted; // Mocking upcoming
-      return true;
+      // 1. Status Filter
+      const statusMap: Record<string, string> = {
+        "To-Do": "todo",
+        "In Progress": "in-progress",
+        "Completed": "completed"
+      };
+      if (task.status !== statusMap[activeFilter]) return false;
+
+      // 2. Time Filter
+      const isToday = task.dueDate.toDateString() === today.toDateString();
+      const isUpcoming = task.dueDate > today && !isToday;
+      const isOverdue = task.dueDate < today && !isToday && task.status !== "completed";
+
+      if (activeTimeFilter === "Today") return isToday;
+      if (activeTimeFilter === "Upcoming") return isUpcoming;
+      if (activeTimeFilter === "Overdue") return isOverdue;
+      
+      return true; // "All"
     })
   })).filter(category => category.tasks.length > 0);
 
@@ -138,21 +173,45 @@ export default function TasksScreen() {
           onChangeText={setSearchQuery} 
         />
 
-        {/* Filters */}
-        <ScrollView 
-          horizontal 
-          showsHorizontalScrollIndicator={false} 
-          className="mb-8"
-        >
-          {filters.map((filter) => (
-            <FilterChip
+        {/* Status Filters (Kanban Tabs) */}
+        <View className="flex-row justify-between mb-4 mt-2">
+          {statusFilters.map((filter) => (
+            <TouchableOpacity
               key={filter}
-              label={filter}
-              isActive={activeFilter === filter}
               onPress={() => setActiveFilter(filter)}
-            />
+              className="px-4 py-2 rounded-xl"
+              style={{ 
+                backgroundColor: activeFilter === filter ? colors.primary : 'transparent',
+                borderWidth: 1,
+                borderColor: activeFilter === filter ? colors.primary : colors.borderColor
+              }}
+            >
+              <AppText 
+                className="font-semibold" 
+                style={{ color: activeFilter === filter ? colors.white : colors.secondaryText }}
+              >
+                {filter}
+              </AppText>
+            </TouchableOpacity>
           ))}
-        </ScrollView>
+        </View>
+
+        {/* Time Filters (Secondary) */}
+        <View className="mb-8">
+          <AppText className="text-xs font-bold mb-3 uppercase tracking-widest" style={{ color: colors.secondaryText }}>
+            Time Filter
+          </AppText>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {timeFilters.map((filter) => (
+              <FilterChip
+                key={filter}
+                label={filter}
+                isActive={activeTimeFilter === filter}
+                onPress={() => setActiveTimeFilter(filter)}
+              />
+            ))}
+          </ScrollView>
+        </View>
 
         {/* Task Lists */}
         {filteredCategories.length > 0 ? (
@@ -180,7 +239,9 @@ export default function TasksScreen() {
           ))
         ) : (
           <View className="items-center justify-center py-20">
-            <AppText style={{ color: colors.secondaryText }}>No tasks found for "{activeFilter}"</AppText>
+            <AppText style={{ color: colors.secondaryText }}>
+              No {activeFilter.toLowerCase()} tasks for {activeTimeFilter.toLowerCase()}
+            </AppText>
           </View>
         )}
         

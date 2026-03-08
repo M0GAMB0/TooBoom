@@ -243,7 +243,7 @@ export default function LoginScreen() {
               </View>
 
               {/* SIGN UP LINK */}
-              <View className="flex-row justfy-center w-full items-center mb-10 border border-2 border-[#fff]">
+              <View className="flex-row justify-center w-full items-center mb-10 ">
                 <AppText 
                   className="text-sm" 
                   style={{ color: colors.secondaryText, fontFamily }}
