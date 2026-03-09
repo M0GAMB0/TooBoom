@@ -1,4 +1,5 @@
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { getFontFamily } from "@/constants/theme";
 import { useAppColors } from "@/hooks/use-app-colors";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -21,9 +22,8 @@ export default function TabLayout() {
           height: 110,
         },
         tabBarLabelStyle: {
-          fontFamily: fontFamily,
+          fontFamily: getFontFamily(fontFamily, "bold"),
           fontSize: 12,
-          fontWeight: "600",
         },
       }}
     >

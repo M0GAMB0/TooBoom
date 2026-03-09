@@ -173,3 +173,29 @@ export const FontStyles = [
   { id: "poppins", displayName: "Poppins", name: "Poppins", value: "Poppins_400Regular" },
   { id: "raleway", displayName: "Raleway", name: "Raleway", value: "Raleway_400Regular" },
 ];
+
+/** Maps each regular font to its bold counterpart */
+export const FontWeightMap: Record<string, string> = {
+  Inter_400Regular: "Inter_700Bold",
+  Merriweather_400Regular: "Merriweather_700Bold",
+  RobotoMono_400Regular: "RobotoMono_700Bold",
+  OpenSans_400Regular: "OpenSans_700Bold",
+  Montserrat_400Regular: "Montserrat_700Bold",
+  Poppins_400Regular: "Poppins_700Bold",
+  Raleway_400Regular: "Raleway_700Bold",
+};
+
+/**
+ * Resolves the correct font file for the given weight.
+ * Use this instead of `fontWeight` to avoid the text-shrinking bug
+ * caused by synthetic bold on custom fonts in React Native.
+ */
+export function getFontFamily(
+  baseFontFamily: string,
+  weight?: "regular" | "bold"
+): string {
+  if (weight === "bold") {
+    return FontWeightMap[baseFontFamily] ?? baseFontFamily;
+  }
+  return baseFontFamily;
+}

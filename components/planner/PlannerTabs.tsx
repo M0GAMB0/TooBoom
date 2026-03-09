@@ -9,17 +9,19 @@ interface PlannerTabsProps {
 }
 
 export function PlannerTabs({ activeTab, onTabChange }: PlannerTabsProps) {
-  const { colors, fontFamily } = useAppColors();
+  const { colors, fontFamily, isDark } = useAppColors();
   const tabs = ["Day", "Week", "Month"];
+  const activeBgColor = isDark ? colors.primary : colors.white;
+  const activeColor = isDark ? colors.text : colors.primary;
 
   return (
     <View className="px-6 mb-6">
-      <View 
+      <View
         className="flex-row rounded-2xl p-1"
-        style={{ 
-            backgroundColor: colors.mutedBackground, 
-            borderWidth: 1, 
-            borderColor: colors.borderColor 
+        style={{
+          backgroundColor: colors.mutedBackground,
+          borderWidth: 1,
+          borderColor: colors.borderColor,
         }}
       >
         {tabs.map((tab) => (
@@ -27,8 +29,9 @@ export function PlannerTabs({ activeTab, onTabChange }: PlannerTabsProps) {
             key={tab}
             onPress={() => onTabChange(tab)}
             className="flex-1 py-2.5 rounded-xl items-center"
-            style={{ 
-              backgroundColor: activeTab === tab ? colors.primary : 'transparent',
+            style={{
+              backgroundColor:
+                activeTab === tab ? activeBgColor : "transparent",
               shadowColor: colors.shadow,
               shadowOffset: { width: 0, height: 2 },
               shadowOpacity: activeTab === tab ? 0.05 : 0,
@@ -36,11 +39,11 @@ export function PlannerTabs({ activeTab, onTabChange }: PlannerTabsProps) {
               elevation: activeTab === tab ? 1 : 0,
             }}
           >
-            <AppText 
-              className="font-bold text-lg" 
-              style={{ 
-                color: activeTab === tab ? colors.text : colors.secondaryText,
-                fontFamily 
+            <AppText
+              className="font-bold text-lg"
+              style={{
+                color: activeTab === tab ? activeColor : colors.secondaryText,
+                fontFamily,
               }}
             >
               {tab}
