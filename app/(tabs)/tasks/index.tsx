@@ -157,12 +157,17 @@ export default function TasksScreen() {
             My Tasks
           </AppText>
         </View>
-        <TouchableOpacity 
-          className="w-14 h-14 rounded-full items-center justify-center"
-          style={{ backgroundColor: "#1F182F" }}
+        <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => router.push("/settings")}
+          className="flex-row items-center rounded-full py-[8px] px-[8px]"
+          style={{
+            backgroundColor: colors.streakBadge,
+            borderWidth: 1,
+            borderColor: colors.borderColor,
+          }}
         >
-          <Ionicons name="settings-sharp" size={28} color="white" />
+          <Ionicons name="settings-sharp" size={24} color={colors.icon} />
         </TouchableOpacity>
       </View>
 

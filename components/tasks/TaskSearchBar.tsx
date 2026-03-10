@@ -15,7 +15,7 @@ export const TaskSearchBar = ({ value, onChangeText, placeholder = "Search tasks
   return (
     <View 
       className="flex-row items-center px-5 py-4 rounded-[24px] mb-8"
-      style={{ backgroundColor: "#1F182F" }}
+      style={{ backgroundColor: colors.cardBackground }}
     >
       <Ionicons name="search" size={24} color={colors.secondaryText} />
       <TextInput

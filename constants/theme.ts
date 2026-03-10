@@ -19,7 +19,8 @@ const borderDark = "#2F2348";
 const streakColor = "#F97316";
 const streakBadgeLight = "#FAF5FF";
 const streakBadgeDark = "#1F182F";
-const secondaryText = "#94A3B8";
+const secondaryTextLight = "#64748B";
+const secondaryTextDark = "#94A3B8";
 const customRed = "#F87171";
 const errorRed = "#EF4444";
 
@@ -61,7 +62,7 @@ export const Colors = {
     borderColor: borderLight,
     streak: streakColor,
     streakBadge: streakBadgeLight,
-    secondaryText,
+    secondaryText: secondaryTextLight,
     customRed,
     errorRed,
     priorityHigh: priorityHigh,
@@ -102,7 +103,7 @@ export const Colors = {
     borderColor: borderDark,
     streak: streakColor,
     streakBadge: streakBadgeDark,
-    secondaryText,
+    secondaryText: secondaryTextDark,
     customRed,
     errorRed,
     priorityHigh: "#F87171",
