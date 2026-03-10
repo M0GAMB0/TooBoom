@@ -1,3 +1,4 @@
+import { MonthYearPicker } from "@/components/planner/MonthYearPicker";
 import { PlannerDatePicker } from "@/components/planner/PlannerDatePicker";
 import { PlannerEvent } from "@/components/planner/PlannerEvent";
 import { PlannerHeader } from "@/components/planner/PlannerHeader";
@@ -10,21 +11,54 @@ import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+const MIN_YEAR = 2026;
+const MIN_MONTH = 2; // March (0-indexed)
+
 export default function PlannerScreen() {
   const { colors, fontFamily } = useAppColors();
   const [activeTab, setActiveTab] = useState("Day");
-  const [selectedDate, setSelectedDate] = useState(11);
+  const [selectedYear, setSelectedYear] = useState(MIN_YEAR);
+  const [selectedMonth, setSelectedMonth] = useState(MIN_MONTH);
+  const [selectedDate, setSelectedDate] = useState(10);
+  const [pickerVisible, setPickerVisible] = useState(false);
+
+  const handlePickerConfirm = (year: number, month: number) => {
+    const daysInNewMonth = new Date(year, month + 1, 0).getDate();
+    setSelectedYear(year);
+    setSelectedMonth(month);
+    if (selectedDate > daysInNewMonth) setSelectedDate(daysInNewMonth);
+  };
+
+  const title = `${MONTH_NAMES[selectedMonth]} ${selectedYear}`;
 
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: colors.background }}
       edges={["top"]}
     >
-      <PlannerHeader title="June 2024" />
+      <PlannerHeader
+        title={title}
+        onTitlePress={() => setPickerVisible(true)}
+      />
+
+      <MonthYearPicker
+        visible={pickerVisible}
+        year={selectedYear}
+        month={selectedMonth}
+        onConfirm={handlePickerConfirm}
+        onClose={() => setPickerVisible(false)}
+      />
 
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         <PlannerTabs activeTab={activeTab} onTabChange={setActiveTab} />
         <PlannerDatePicker
+          year={selectedYear}
+          month={selectedMonth}
           selectedDate={selectedDate}
           onDateChange={setSelectedDate}
         />

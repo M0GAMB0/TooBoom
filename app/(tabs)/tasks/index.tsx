@@ -4,10 +4,9 @@ import { TaskCard } from "@/components/tasks/TaskCard";
 import { TaskSearchBar } from "@/components/tasks/TaskSearchBar";
 import { AppText } from "@/components/ui/AppText";
 import { FAB } from "@/components/ui/FAB";
+import { TabHeader } from "@/components/ui/TabHeader";
 import { useAppColors } from "@/hooks/use-app-colors";
 import { navigateToNewTask } from "@/src/utils/navigation";
-import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -35,7 +34,6 @@ interface Category {
 
 export default function TasksScreen() {
   const { colors } = useAppColors();
-  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   
   // States for dual filtering
@@ -150,26 +148,7 @@ export default function TasksScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      {/* Header */}
-      <View className="flex-row items-center justify-between px-6 py-4">
-        <View>
-          <AppText className="text-2xl font-extrabold" style={{ color: colors.text }}>
-            My Tasks
-          </AppText>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() => router.push("/settings")}
-          className="flex-row items-center rounded-full py-[8px] px-[8px]"
-          style={{
-            backgroundColor: colors.streakBadge,
-            borderWidth: 1,
-            borderColor: colors.borderColor,
-          }}
-        >
-          <Ionicons name="settings-sharp" size={24} color={colors.icon} />
-        </TouchableOpacity>
-      </View>
+      <TabHeader title="My Tasks" />
 
       <ScrollView className="flex-1 px-6" showsVerticalScrollIndicator={false}>
         {/* Search Bar */}
